@@ -14,3 +14,15 @@ config/name="TrackFactory"
 run/main_scene="uid://coabmr6btdcn4"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://Scripts/global.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
+
+[global_group]
+
+draggable="This object can be dragged and dropped."

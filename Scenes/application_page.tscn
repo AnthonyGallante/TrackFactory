@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://nxm00lmjjje8"]
+
+[ext_resource type="PackedScene" uid="uid://bvq2nvy84cxg5" path="res://Objects/draggable_object.tscn" id="1_ivqe8"]
+[ext_resource type="Texture2D" uid="uid://c4qjw2jiu4l17" path="res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Dice/dieRed1.png" id="2_rbgls"]
+
+[node name="ApplicationPage" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Map Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 834.0
+offset_bottom = 510.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Utility Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 830.0
+offset_top = 10.0
+offset_right = 1117.0
+offset_bottom = 510.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DraggableObject" parent="." instance=ExtResource("1_ivqe8")]
+position = Vector2(926, 90)
+sprite = ExtResource("2_rbgls")
