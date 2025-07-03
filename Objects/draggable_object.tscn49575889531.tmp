@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bvq2nvy84cxg5"]
 
-[ext_resource type="Script" uid="uid://dbryvioe6mbcg" path="res://Objects/draggable_object_state_machine.gd" id="1_vckmj"]
+[ext_resource type="Script" uid="uid://dknngu0ca5u7o" path="res://Objects/draggable_object.gd" id="1_3iuyc"]
 [ext_resource type="Texture2D" uid="uid://codw651cyn53k" path="res://Assets/Art/Objects/Shapes/circle.png" id="2_vckmj"]
 [ext_resource type="AudioStream" uid="uid://bd4taknqxtb6s" path="res://Assets/Audio/kenney_interface-sounds/Audio/bong_001.ogg" id="3_lkiqh"]
 [ext_resource type="AudioStream" uid="uid://hl8f1r8kegx8" path="res://Assets/Audio/kenney_interface-sounds/Audio/back_001.ogg" id="4_1247g"]
@@ -11,7 +11,7 @@
 radius = 45.3982
 
 [node name="DraggableObject" type="Node2D" groups=["draggable"]]
-script = ExtResource("1_vckmj")
+script = ExtResource("1_3iuyc")
 sprite = ExtResource("2_vckmj")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -45,7 +45,7 @@ offset_top = 15.0
 offset_right = 13.0
 offset_bottom = 15.0
 
-[node name="TruePosition" type="Node2D" parent="."]
-
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

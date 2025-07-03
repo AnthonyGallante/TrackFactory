@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbt1cii742nhn"]
+
+[ext_resource type="Texture2D" uid="uid://codw651cyn53k" path="res://Assets/Art/Objects/Shapes/circle.png" id="1_hai32"]
+[ext_resource type="Script" uid="uid://dvidlfkjr7baf" path="res://UI/node_menu.gd" id="1_jnk6n"]
+[ext_resource type="Texture2D" uid="uid://kmqdytitx56" path="res://Assets/Art/UI/kenney_ui-pack/PNG/Green/Double/check_square_color_checkmark.png" id="2_65ddq"]
+[ext_resource type="Texture2D" uid="uid://b0qcpl26ls4xc" path="res://Assets/Art/Objects/Shapes/triangle_up.png" id="2_lghjf"]
+[ext_resource type="Texture2D" uid="uid://uo27m4r45iev" path="res://Assets/Art/Objects/Shapes/square.png" id="3_rgo66"]
+[ext_resource type="Texture2D" uid="uid://beg6inp1fogqa" path="res://Assets/Art/UI/kenney_ui-pack/PNG/Red/Double/check_square_color_cross.png" id="6_rmn0a"]
+
+[node name="NodeMenu" type="Control"]
+z_index = 1000
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_jnk6n")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 250.0
+offset_bottom = 326.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 5.0
+offset_right = 150.0
+offset_bottom = 45.0
+grow_horizontal = 2
+text = "Select Node"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.19
+anchor_right = 0.5
+anchor_bottom = 0.19
+offset_left = -150.0
+offset_top = -7.84
+offset_right = 150.0
+offset_bottom = 266.16
+grow_horizontal = 2
+
+[node name="AddNodeHere" type="Button" parent="Panel/VBoxContainer"]
+texture_filter = 2
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "    Connect to Path"
+icon = ExtResource("2_65ddq")
+alignment = 0
+expand_icon = true
+
+[node name="SwitchNodeConstantVelocity" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "    Constant Velocity"
+icon = ExtResource("1_hai32")
+alignment = 0
+expand_icon = true
+
+[node name="SwitchNodeAcceleration" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "    Acceleration"
+icon = ExtResource("2_lghjf")
+alignment = 0
+expand_icon = true
+
+[node name="SwitchNodeDwell" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "    Dwell"
+icon = ExtResource("3_rgo66")
+alignment = 0
+expand_icon = true
+
+[node name="Delete" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "    Delete"
+icon = ExtResource("6_rmn0a")
+alignment = 0
+expand_icon = true
+
+[connection signal="button_down" from="Panel/VBoxContainer/AddNodeHere" to="." method="_on_add_node_here_button_down"]
+[connection signal="button_down" from="Panel/VBoxContainer/SwitchNodeConstantVelocity" to="." method="_on_switch_node_constant_velocity_button_down"]
+[connection signal="button_down" from="Panel/VBoxContainer/SwitchNodeAcceleration" to="." method="_on_switch_node_acceleration_button_down"]
+[connection signal="button_down" from="Panel/VBoxContainer/SwitchNodeDwell" to="." method="_on_switch_node_dwell_button_down"]
+[connection signal="button_down" from="Panel/VBoxContainer/Delete" to="." method="_on_delete_button_down"]

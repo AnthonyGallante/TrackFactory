@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://blps1lcgdf363"]
+
+[ext_resource type="Script" uid="uid://duop7wnub2k0m" path="res://Scripts/entity.gd" id="1_xxurk"]
+[ext_resource type="Texture2D" uid="uid://pwdatbjyhx1v" path="res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Pieces (Green)/pieceGreen_border01.png" id="2_w4nrf"]
+[ext_resource type="Texture2D" uid="uid://445rijqe5l7q" path="res://Assets/Art/Objects/kenney_emotes-pack/PNG/Vector/Style 1/emote_alert.png" id="3_w4nrf"]
+
+[node name="Entity" type="Node2D"]
+z_index = 1000
+script = ExtResource("1_xxurk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 5
+position = Vector2(0, -17.6)
+texture = ExtResource("2_w4nrf")
+
+[node name="Emote" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(0, -48)
+texture = ExtResource("3_w4nrf")
+
+[node name="StateMachine" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="StateMachine"]
+
+[node name="ConstantVelocity" type="Node" parent="StateMachine"]
+
+[node name="Accelerating" type="Node" parent="StateMachine"]
+
+[node name="Decelerating" type="Node" parent="StateMachine"]
+
+[node name="Waiting" type="Node" parent="StateMachine"]
+
+[node name="Finished" type="Node" parent="StateMachine"]
