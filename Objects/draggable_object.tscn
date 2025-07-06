@@ -47,5 +47,19 @@ offset_bottom = 15.0
 
 [node name="TruePosition" type="Node2D" parent="."]
 
+[node name="Label" type="Label" parent="TruePosition"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 71.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+text = "Node Type"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

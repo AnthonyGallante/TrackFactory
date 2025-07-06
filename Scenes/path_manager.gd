@@ -22,15 +22,12 @@ func _process(_delta: float) -> void:
 	line_path_2d.curve.set_point_position(line_path_2d.curve.point_count - 1, end_local)
 	
 	# Check if there are any other points in the path
-	if len(additional_points) > 0:
-		for point in additional_points:
-			var index = additional_points[point] + 1
-			line_path_2d.curve.set_point_position(index, line_path_2d.to_local(point.true_position.global_position))
-	# If so, update those points with:
-	# For each point, get its index and the node that it is attached to.
-	
-	# var point_local = line_path_2d.to_local(object.true_position.global_position)
-	# line_path_2d.curve.set_point_position(index, point_local)
+	if len(additional_points) == 0:
+		return
+		
+	for point in additional_points:
+		var index = additional_points[point] + 1
+		line_path_2d.curve.set_point_position(index, line_path_2d.to_local(point.true_position.global_position))
 
 
 func reset_path():

@@ -52,6 +52,7 @@ func _ready() -> void:
 		true_position.position = Vector2(-18.0, 48.0)
 		sprite_2d.position += Vector2(10.0, 0.0)
 		$Area2D.scale = Vector2.ONE * 1.5
+		$TruePosition/Label.position -= Vector2(0.0, 10.0)
 		
 	start_location = global_position
 	area_2d.input_pickable = true
@@ -66,6 +67,11 @@ func _process(_delta: float) -> void:
 			_process_dragging_state()
 		State.MENU_OPEN:
 			_process_menu_open_state()
+			
+	if is_hovering:
+		$TruePosition/Label.visible = true
+	else:
+		$TruePosition/Label.visible = false
 
 
 # ==============================================================================

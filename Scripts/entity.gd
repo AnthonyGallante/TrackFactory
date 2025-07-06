@@ -1,5 +1,12 @@
 extends Node2D
 
+@export var VDOP := 1.0
+@export var HDOP := 1.0
+@export var max_speed := 100.0
+@export var report_frequency := 100
+@export var report_throughput := 0.90
+
+
 # ICON
 const GENERIC = preload("res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Pieces (Green)/pieceGreen_border01.png")
 const PEDESTRIAN = preload("res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Pieces (Green)/pieceGreen_border04.png")
