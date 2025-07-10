@@ -245,6 +245,7 @@ func find_map():
 		print('Map not Found')
 
 
+## TODO: Get accurate node latlons for map
 func get_node_latlon():
 #
 	#var viewport_to_app_transform: Transform2D = viewport.get_canvas_transform()
