@@ -56,6 +56,7 @@ func _on_switch_node_dwell_button_down() -> void:
 
 
 func _on_delete_button_down() -> void:
+	path_manager.remove_point_at_index(path_manager.additional_points[parent] + 1)
 	parent.queue_free()
 	path_manager.additional_points.erase(parent)
 

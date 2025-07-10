@@ -47,3 +47,7 @@ func add_point_at_position(global_pos: Vector2, index: int = -1) -> void:
 		index = line_path_2d.curve.point_count - 1
 	
 	line_path_2d.curve.add_point(local_pos, Vector2.ZERO, Vector2.ZERO, index)
+
+
+func remove_point_at_index(index: int = 1) -> void:
+	line_path_2d.curve.remove_point(index)

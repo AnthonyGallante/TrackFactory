@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://nxm00lmjjje8"]
+[gd_scene load_steps=17 format=3 uid="uid://nxm00lmjjje8"]
 
 [ext_resource type="Script" uid="uid://d3jkrcn3rpit8" path="res://Scenes/application_page.gd" id="1_gdmv6"]
 [ext_resource type="PackedScene" uid="uid://bvq2nvy84cxg5" path="res://Objects/draggable_object.tscn" id="1_ivqe8"]
@@ -11,9 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://blps1lcgdf363" path="res://Objects/entity.tscn" id="5_gdmv6"]
 [ext_resource type="Texture2D" uid="uid://bvp84jer8nir8" path="res://Assets/Textures/path2dtexture.png" id="5_l7mws"]
 [ext_resource type="Script" uid="uid://d1ojpkmkjgeo1" path="res://addons/linepath2d/linepath2d.gd" id="5_o7ptd"]
+[ext_resource type="Script" uid="uid://eh165exkh7nf" path="res://Scripts/mouse_latitude.gd" id="5_si36r"]
+[ext_resource type="PackedScene" uid="uid://c5gklkq6v2vrr" path="res://Objects/map.tscn" id="12_hq4f6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22e4n"]
-bg_color = Color(0.933333, 0.964706, 0.937255, 1)
+bg_color = Color(0.933333, 0.964706, 0.937255, 0.278431)
 
 [sub_resource type="Curve2D" id="Curve2D_gdmv6"]
 _data = {
@@ -31,6 +33,29 @@ script = ExtResource("1_gdmv6")
 [node name="PathManager" type="Node2D" parent="."]
 script = ExtResource("2_22e4n")
 
+[node name="MapNode" type="Node2D" parent="."]
+position = Vector2(543, 335)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MapNode"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -538.0
+offset_top = -266.0
+offset_right = 604.0
+offset_bottom = 246.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="MapNode/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1142, 512)
+render_target_update_mode = 4
+
+[node name="Map" parent="MapNode/SubViewportContainer/SubViewport" instance=ExtResource("12_hq4f6")]
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 5
@@ -42,6 +67,7 @@ grow_horizontal = 2
 mouse_filter = 2
 
 [node name="Map Panel" type="Panel" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -76,7 +102,39 @@ offset_bottom = 65.0
 grow_horizontal = 2
 mouse_filter = 2
 
+[node name="Information Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -571.0
+offset_top = -64.0
+offset_right = 571.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="MouseCoordinates" type="Label" parent="Control/Information Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -11.0
+offset_right = 169.0
+offset_bottom = 21.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.362829, 0.362829, 0.362829, 1)
+text = "Lat, Lon"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_si36r")
+
 [node name="AddNodeButton" type="Button" parent="Control"]
+z_index = 100
 layout_mode = 0
 offset_left = 1089.0
 offset_top = 78.0

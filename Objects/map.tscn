@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5gklkq6v2vrr"]
+
+[ext_resource type="Texture2D" uid="uid://bxw237mpdbjrm" path="res://Assets/Art/Objects/WorldMap/8081_earthmap10k.jpg" id="1_mjstx"]
+[ext_resource type="Script" uid="uid://cdrvcwmqaxupb" path="res://Scripts/map.gd" id="1_rpmjf"]
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_rpmjf")
+metadata/_edit_lock_ = true
+
+[node name="MapMain" type="Sprite2D" parent="."]
+texture_filter = 5
+texture = ExtResource("1_mjstx")
+metadata/_edit_lock_ = true
+
+[node name="MapEastOverlap" type="Sprite2D" parent="."]
+texture_filter = 5
+position = Vector2(10800, 0)
+texture = ExtResource("1_mjstx")
+metadata/_edit_lock_ = true
+
+[node name="MapWestOverlap" type="Sprite2D" parent="."]
+texture_filter = 5
+position = Vector2(-10800, 0)
+texture = ExtResource("1_mjstx")
+metadata/_edit_lock_ = true
+
+[node name="SouthPole" type="ColorRect" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16200.0
+offset_top = 2700.0
+offset_right = 16200.0
+offset_bottom = 5400.0
+grow_horizontal = 2
+color = Color(0.886275, 0.929412, 0.952941, 1)
+metadata/_edit_lock_ = true
+
+[node name="North Pole" type="ColorRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -16200.0
+offset_top = -5400.0
+offset_right = 16200.0
+offset_bottom = -2700.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.854902, 0.85098, 0.905882, 1)
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, -4)
+zoom = Vector2(0.5, 0.5)

@@ -14,6 +14,7 @@ position = Vector2(0, -17.6)
 texture = ExtResource("2_w4nrf")
 
 [node name="Emote" type="Sprite2D" parent="Sprite2D"]
+visible = false
 position = Vector2(0, -48)
 texture = ExtResource("3_w4nrf")
 
