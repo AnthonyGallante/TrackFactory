@@ -100,7 +100,7 @@ offset_right = 528.5
 offset_bottom = 266.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.986801, 0.99337, 0.987597, 1)
+color = Color(0.861028, 0.930556, 0.870172, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="Control/Panel"]
 layout_mode = 1

@@ -56,9 +56,11 @@ func _on_switch_node_dwell_button_down() -> void:
 
 
 func _on_delete_button_down() -> void:
-	path_manager.remove_point_at_index(path_manager.additional_points[parent] + 1)
+	# Before we delete the point, we check if this point is even in the path.
+	if parent in path_manager.additional_points:
+		path_manager.remove_point_at_index(path_manager.additional_points[parent] + 1)
+		path_manager.additional_points.erase(parent)
 	parent.queue_free()
-	path_manager.additional_points.erase(parent)
 
 
 func _on_add_node_here_button_down() -> void:

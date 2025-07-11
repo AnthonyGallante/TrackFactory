@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c5gklkq6v2vrr" path="res://Objects/map.tscn" id="12_hq4f6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22e4n"]
-bg_color = Color(0.933333, 0.964706, 0.937255, 0.278431)
+bg_color = Color(0.933333, 0.964706, 0.937255, 1)
 
 [sub_resource type="Curve2D" id="Curve2D_gdmv6"]
 _data = {
@@ -77,7 +77,7 @@ anchor_bottom = 0.5
 offset_left = -571.0
 offset_top = -253.5
 offset_right = 571.0
-offset_bottom = 291.5
+offset_bottom = 256.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -86,7 +86,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_22e4n")
 [node name="TextureRect" type="TextureRect" parent="Control/Map Panel"]
 layout_mode = 0
 offset_right = 1142.0
-offset_bottom = 545.0
+offset_bottom = 510.0
 texture = ExtResource("3_qn642")
 stretch_mode = 1
 
@@ -151,6 +151,14 @@ offset_right = 1139.0
 offset_bottom = 60.0
 icon = ExtResource("4_xwyji")
 expand_icon = true
+
+[node name="ScaleButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 968.0
+offset_top = 11.0
+offset_right = 1083.0
+offset_bottom = 64.0
+text = "Select Scale"
 
 [node name="LinePath2D" type="Path2D" parent="."]
 position = Vector2(-61, -140)

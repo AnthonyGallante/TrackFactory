@@ -240,7 +240,6 @@ func find_map():
 	map_node = get_node("../MapNode/SubViewportContainer/SubViewport/Map")
 	if map_node:
 		viewport = map_node.get_parent()
-		print(map_node)
 	else:
 		print('Map not Found')
 
