@@ -10,9 +10,9 @@ var coordinate: Vector2
 
 # CAMERA
 @onready var camera: Camera2D = $Camera2D
-const MINIMUM_ZOOM: Vector2 = Vector2(0.150, 0.150)
+const MINIMUM_ZOOM: Vector2 = Vector2(0.1, 0.1)
 const MAXIMUM_ZOOM: Vector2 = Vector2(125.0, 125.0)
-var scroll_pace := Vector2(0.07, 0.07)
+var scroll_pace := Vector2(0.25, 0.25)
 
 
 func _process(_delta: float) -> void:
@@ -67,19 +67,15 @@ func _control_scroll() -> void:
 	if Input.is_action_just_pressed("scroll_up"):
 		if camera.zoom >= MAXIMUM_ZOOM:
 			return
-		elif camera.zoom > Vector2.ONE:
-			camera.zoom += scroll_pace * 10
 		else:
-			camera.zoom += scroll_pace
+			camera.zoom += camera.zoom * scroll_pace
 	
 	# Scrolling out of the map
 	if Input.is_action_just_pressed("scroll_down"):
-		if camera.zoom <= MINIMUM_ZOOM:
-			return
-		elif camera.zoom > Vector2.ONE:
-			camera.zoom -= scroll_pace * 10
+		if camera.zoom <= MINIMUM_ZOOM * 1.25:
+			camera.zoom = MINIMUM_ZOOM
 		else:
-			camera.zoom -= scroll_pace
+			camera.zoom -= camera.zoom * scroll_pace
 
 
 func _control_grid():
