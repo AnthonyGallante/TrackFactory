@@ -79,4 +79,5 @@ func _control_scroll() -> void:
 
 
 func _control_grid():
+	# Increase opacity as you zoom into the map
 	$Camera2D/PlainGrid.modulate.a = (camera.zoom.x / 50) - 0.25
