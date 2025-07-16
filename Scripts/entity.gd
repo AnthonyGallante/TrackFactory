@@ -6,6 +6,10 @@ extends Node2D
 @export var report_frequency := 100
 @export var report_throughput := 0.90
 
+@onready var map_node: Node2D = $"../../../Map"
+
+func _process(_delta: float) -> void:
+	scale = Vector2.ONE / map_node.camera.zoom
 
 # ICON
 const GENERIC = preload("res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Pieces (Green)/pieceGreen_border01.png")

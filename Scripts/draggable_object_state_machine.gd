@@ -1,7 +1,7 @@
 extends Node2D
 
 # State Machine
-enum State { IDLE, DRAGGING, MENU_OPEN }
+enum State {IDLE, DRAGGING, MENU_OPEN}
 var current_state: State = State.IDLE
 
 # Exports
@@ -18,6 +18,7 @@ var current_state: State = State.IDLE
 @onready var area_2d: Area2D = $Area2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var true_position: Node2D = $TruePosition
+@onready var type_label: Label = $TruePosition/Label
 
 # Audio
 @onready var hover_over: AudioStreamPlayer2D = $Audio/HoverOver
@@ -55,10 +56,9 @@ func _ready() -> void:
 	sprite_2d.scale = Vector2(1, 1) * sprite_scale
 	
 	if "flag" in sprite_2d.texture.resource_path:
-		true_position.position = Vector2(-18.0, 48.0)
-		sprite_2d.position += Vector2(10.0, 0.0)
-		$Area2D.scale = Vector2.ONE * 1.5
-		$TruePosition/Label.position -= Vector2(0.0, 10.0)
+		sprite_2d.position = Vector2(18.0, -48.0)
+		$Area2D.scale = Vector2.ONE * 2
+		type_label.position -= Vector2(0.0, 10.0)
 	
 	start_location = global_position
 	area_2d.input_pickable = true
@@ -76,14 +76,15 @@ func _process(_delta: float) -> void:
 			_process_menu_open_state()
 			
 	if is_hovering:
-		$TruePosition/Label.visible = true
+		type_label.text = sprite_2d.texture.resource_path
+		type_label.visible = true
 		$TruePosition/Coordinates. visible = true
 	else:
-		$TruePosition/Label.visible = false
+		type_label.visible = false
 		$TruePosition/Coordinates. visible = false
 		
 	get_node_latlon()
-
+	scale = Vector2.ONE / map_node.camera.zoom
 
 # ==============================================================================
 # STATE PROCESSING
@@ -119,7 +120,6 @@ func _process_menu_open_state() -> void:
 		_transition_to_idle()
 	elif Input.is_action_just_pressed("escape"):
 		_transition_to_idle()
-
 
 # ==============================================================================
 # STATE TRANSITIONS
@@ -165,7 +165,6 @@ func _cancel_dragging() -> void:
 	unsuccessful_drop()
 	current_state = State.IDLE
 
-
 # ==============================================================================
 # MENU FUNCTIONS
 # ==============================================================================
@@ -187,7 +186,6 @@ func _close_menu() -> void:
 	menu_tween.tween_property(node_menu, "scale", Vector2(0.01, 0.01), 0.04)
 	await menu_tween.finished
 	node_menu.visible = false
-
 
 # ==============================================================================
 # HELPER FUNCTIONS
@@ -237,22 +235,16 @@ func check_disable_buttons():
 
 
 func find_map():
-	map_node = get_node("../MapNode/SubViewportContainer/SubViewport/Map")
-	if map_node:
-		viewport = map_node.get_parent()
-	else:
-		print('Map not Found')
+	map_node = get_node("../Map")
+	#if map_node:
+		#print('Map found:', map_node)
+	#else:
+		#print('Map not Found.')
 
 
-## TODO: Get accurate node latlons for map
 func get_node_latlon():
-#
-	#var viewport_to_app_transform: Transform2D = viewport.get_canvas_transform()
-	#var latlon = viewport_to_app_transform.basis_xform(true_position.global_position - viewport_to_app_transform.origin)
-	#latlon = map_node.pixel_to_latlon(latlon.x, latlon.y)
-	#$TruePosition/Coordinates.text = "(%.5f, %.5f)" % [latlon.x, latlon.y]
-	
-	pass
+	var latlon = map_node.pixel_to_latlon(true_position.global_position.x, true_position.global_position.y)
+	$TruePosition/Coordinates.text = "(%.5f, %.5f)" % [latlon.x, latlon.y]
 
 # ==============================================================================
 # SIGNALS

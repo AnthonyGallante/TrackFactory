@@ -1,19 +1,22 @@
 extends Node2D
 
-@onready var start_flag: Node2D = $"../StartFlag"
-@onready var end_flag: Node2D = $"../EndFlag"
-@onready var line_path_2d: Path2D = $"../LinePath2D"
+@onready var start_flag: Node2D = $"../MapNode/StartFlag"
+@onready var end_flag: Node2D = $"../MapNode/EndFlag"
+@onready var line_path_2d: Path2D = $"../MapNode/LinePath2D"
+@onready var map: Node2D = $"../MapNode/Map"
 
 # Additional points are recorded in the following:
 #   {Point_1: DraggableObject1, Point_2: DraggableObject2, ... }
-var additional_points := {}
+@onready var additional_points := {}
 
 
 func _ready() -> void:
 	reset_path()
 
-
 func _process(_delta: float) -> void:
+	
+	line_path_2d.width = 10 / map.camera.zoom.x
+	
 	# Always update first and last points
 	var start_local = line_path_2d.to_local(start_flag.true_position.global_position)
 	var end_local = line_path_2d.to_local(end_flag.true_position.global_position)

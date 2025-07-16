@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://nxm00lmjjje8"]
+[gd_scene load_steps=15 format=3 uid="uid://nxm00lmjjje8"]
 
 [ext_resource type="Script" uid="uid://d3jkrcn3rpit8" path="res://Scenes/application_page.gd" id="1_gdmv6"]
 [ext_resource type="PackedScene" uid="uid://bvq2nvy84cxg5" path="res://Objects/draggable_object.tscn" id="1_ivqe8"]
 [ext_resource type="Script" uid="uid://b6kgctxvhmjwc" path="res://Scenes/path_manager.gd" id="2_22e4n"]
 [ext_resource type="Texture2D" uid="uid://jk2udgvgpfbe" path="res://Assets/Art/UI/kenney_game-icons/PNG/White/2x/plus.png" id="2_65sjf"]
 [ext_resource type="Texture2D" uid="uid://ccqs14l2lkj0h" path="res://Assets/Art/Objects/Shapes/stop_flag.png" id="2_rbgls"]
-[ext_resource type="Texture2D" uid="uid://yabiluq225qx" path="res://Assets/Textures/kenney_pattern-pack-2/PNG/Thin/Default (256px)/pattern_0017.png" id="3_qn642"]
 [ext_resource type="Texture2D" uid="uid://bnfxhmrbf60eg" path="res://Assets/Art/Objects/Shapes/start_flag.png" id="4_rit3c"]
 [ext_resource type="Texture2D" uid="uid://bypuym1aopd63" path="res://Assets/Art/UI/kenney_game-icons/PNG/White/2x/return.png" id="4_xwyji"]
 [ext_resource type="PackedScene" uid="uid://blps1lcgdf363" path="res://Objects/entity.tscn" id="5_gdmv6"]
@@ -14,9 +13,6 @@
 [ext_resource type="Script" uid="uid://eh165exkh7nf" path="res://Scripts/mouse_latitude.gd" id="5_si36r"]
 [ext_resource type="PackedScene" uid="uid://c5gklkq6v2vrr" path="res://Objects/map.tscn" id="12_hq4f6"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22e4n"]
-bg_color = Color(0.933333, 0.964706, 0.937255, 1)
-
 [sub_resource type="Curve2D" id="Curve2D_gdmv6"]
 _data = {
 "points": PackedVector2Array(0, 0, 400, 0, 186.386, 398.966, -242.802, 0, 242.802, 0, 637, 625, 0, 0, 0, 0, 1054, 405)
@@ -24,8 +20,10 @@ _data = {
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_o7ptd"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+metadata/_snap_count = 32
 
 [node name="ApplicationPage" type="Node2D"]
 script = ExtResource("1_gdmv6")
@@ -36,25 +34,38 @@ script = ExtResource("2_22e4n")
 [node name="MapNode" type="Node2D" parent="."]
 position = Vector2(543, 335)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MapNode"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -538.0
-offset_top = -266.0
-offset_right = 604.0
-offset_bottom = 246.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Map" parent="MapNode" instance=ExtResource("12_hq4f6")]
+position = Vector2(-543, -335)
 
-[node name="SubViewport" type="SubViewport" parent="MapNode/SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(1142, 512)
-render_target_update_mode = 4
+[node name="LinePath2D" type="Path2D" parent="MapNode"]
+position = Vector2(-604, -475)
+curve = SubResource("Curve2D_gdmv6")
+script = ExtResource("5_o7ptd")
+_curve = SubResource("Curve2D_gdmv6")
+width = 10.0
+width_profile = SubResource("Curve_o7ptd")
+fill_default_color = Color(0.45098, 0.803922, 0.294118, 1)
+fill_texture = ExtResource("5_l7mws")
+fill_texture_mode = 2
+cap_begin_cap = 1
+cap_end_cap = 1
+metadata/_custom_type_script = "uid://d1ojpkmkjgeo1"
 
-[node name="Map" parent="MapNode/SubViewportContainer/SubViewport" instance=ExtResource("12_hq4f6")]
+[node name="PathFollow2D" type="PathFollow2D" parent="MapNode/LinePath2D"]
+position = Vector2(186.386, 398.966)
+rotates = false
+
+[node name="Entity" parent="MapNode/LinePath2D/PathFollow2D" instance=ExtResource("5_gdmv6")]
+
+[node name="StartFlag" parent="MapNode" instance=ExtResource("1_ivqe8")]
+position = Vector2(-442, -71)
+is_start = true
+sprite = ExtResource("4_rit3c")
+
+[node name="EndFlag" parent="MapNode" instance=ExtResource("1_ivqe8")]
+position = Vector2(477, -74)
+is_end = true
+sprite = ExtResource("2_rbgls")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -65,30 +76,6 @@ offset_right = 1152.0
 offset_bottom = 649.0
 grow_horizontal = 2
 mouse_filter = 2
-
-[node name="Map Panel" type="Panel" parent="Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -571.0
-offset_top = -253.5
-offset_right = 571.0
-offset_bottom = 256.5
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_22e4n")
-
-[node name="TextureRect" type="TextureRect" parent="Control/Map Panel"]
-layout_mode = 0
-offset_right = 1142.0
-offset_bottom = 510.0
-texture = ExtResource("3_qn642")
-stretch_mode = 1
 
 [node name="Utility Panel" type="Panel" parent="Control"]
 layout_mode = 1
@@ -151,43 +138,6 @@ offset_right = 1139.0
 offset_bottom = 60.0
 icon = ExtResource("4_xwyji")
 expand_icon = true
-
-[node name="ScaleButton" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 968.0
-offset_top = 11.0
-offset_right = 1083.0
-offset_bottom = 64.0
-text = "Select Scale"
-
-[node name="LinePath2D" type="Path2D" parent="."]
-position = Vector2(-61, -140)
-curve = SubResource("Curve2D_gdmv6")
-script = ExtResource("5_o7ptd")
-_curve = SubResource("Curve2D_gdmv6")
-width = 10.0
-width_profile = SubResource("Curve_o7ptd")
-fill_default_color = Color(0.45098, 0.803922, 0.294118, 1)
-fill_texture = ExtResource("5_l7mws")
-fill_texture_mode = 2
-metadata/_custom_type_script = "uid://d1ojpkmkjgeo1"
-
-[node name="PathFollow2D" type="PathFollow2D" parent="LinePath2D"]
-position = Vector2(186.386, 393.966)
-v_offset = -5.0
-rotates = false
-
-[node name="Entity" parent="LinePath2D/PathFollow2D" instance=ExtResource("5_gdmv6")]
-
-[node name="StartFlag" parent="." instance=ExtResource("1_ivqe8")]
-position = Vector2(101, 264)
-is_start = true
-sprite = ExtResource("4_rit3c")
-
-[node name="EndFlag" parent="." instance=ExtResource("1_ivqe8")]
-position = Vector2(1020, 261)
-is_end = true
-sprite = ExtResource("2_rbgls")
 
 [connection signal="pressed" from="Control/AddNodeButton" to="." method="_add_node_button_pressed"]
 [connection signal="pressed" from="Control/ResetButton" to="." method="_on_reset_button_pressed"]

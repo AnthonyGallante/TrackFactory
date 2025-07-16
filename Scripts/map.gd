@@ -15,15 +15,21 @@ const MAXIMUM_ZOOM: Vector2 = Vector2(125.0, 125.0)
 var scroll_pace := Vector2(0.25, 0.25)
 
 
+func _ready() -> void:
+	#camera.position_smoothing_enabled = true
+	#camera.position_smoothing_speed = 1.0
+	pass
+
 func _process(_delta: float) -> void:
 	
 	mouse_loc = get_global_mouse_position()
 	coordinate = pixel_to_latlon(mouse_loc.x, mouse_loc.y)
 	
 	_control_scroll()
+	_control_pan()
 	_control_grid()
 	
-	prints("Distance from Equator (m)", haversine(0, 0, coordinate.x, coordinate.y))
+	#prints("Distance from Equator (m)", haversine(0, 0, coordinate.x, coordinate.y))
 
 
 func latlon_to_pixel(latitude: float, longitude: float) -> Vector2:
@@ -80,4 +86,10 @@ func _control_scroll() -> void:
 
 func _control_grid():
 	# Increase opacity as you zoom into the map
-	$Camera2D/PlainGrid.modulate.a = (camera.zoom.x / 50) - 0.25
+	$PlainGrid.modulate.a = (camera.zoom.x / 50) - 0.25
+
+
+# TODO: Fix this lol
+func _control_pan():
+	if Input.is_action_pressed("middle_click"):
+		camera.global_position -= mouse_loc

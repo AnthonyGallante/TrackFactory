@@ -54,31 +54,38 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="PlainGrid" type="ColorRect" parent="Camera2D"]
+[node name="PlainGrid" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0.317647)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
+offset_left = -16209.0
+offset_top = -3600.0
+offset_right = 16209.0
+offset_bottom = 3600.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 color = Color(0.861028, 0.930556, 0.870172, 1)
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="Camera2D/PlainGrid"]
+[node name="TextureRect" type="TextureRect" parent="PlainGrid"]
 texture_filter = 5
-layout_mode = 0
-offset_left = 154.0
-offset_top = 154.0
-offset_right = 4250.0
-offset_bottom = 4250.0
-scale = Vector2(0.05, 0.05)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16327.0
+offset_top = -5381.0
+offset_right = 1.60947e+06
+offset_bottom = 533719.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.02, 0.02)
 texture = ExtResource("3_n0fjr")
 expand_mode = 1
 stretch_mode = 1
