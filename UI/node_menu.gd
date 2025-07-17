@@ -69,6 +69,6 @@ func _on_add_node_here_button_down() -> void:
 		var most_recently_filled_index = len(path_manager.additional_points)
 		path_manager.additional_points[parent] = most_recently_filled_index
 		
-		path_manager.add_point_at_position(parent.true_position.global_position, most_recently_filled_index + 1)
+		path_manager.add_point_at_index(parent.true_position.global_position, most_recently_filled_index + 1)
 	else:
 		print('Node is already added to the path.')

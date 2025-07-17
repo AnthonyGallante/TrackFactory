@@ -58,6 +58,7 @@ func _ready() -> void:
 	if "flag" in sprite_2d.texture.resource_path:
 		sprite_2d.position = Vector2(18.0, -48.0)
 		$Area2D.scale = Vector2.ONE * 2
+		area_2d.position = Vector2(18.0, -48.0)
 		type_label.position -= Vector2(0.0, 10.0)
 	
 	start_location = global_position
@@ -84,7 +85,10 @@ func _process(_delta: float) -> void:
 		$TruePosition/Coordinates. visible = false
 		
 	get_node_latlon()
+	
 	scale = Vector2.ONE / map_node.camera.zoom
+	if map_node.camera.zoom < Vector2.ONE * 5.0:
+		scale *= 0.75
 
 # ==============================================================================
 # STATE PROCESSING

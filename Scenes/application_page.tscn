@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c5gklkq6v2vrr" path="res://Objects/map.tscn" id="12_hq4f6"]
 
 [sub_resource type="Curve2D" id="Curve2D_gdmv6"]
+bake_interval = 10.0
 _data = {
 "points": PackedVector2Array(0, 0, 400, 0, 186.386, 398.966, -242.802, 0, 242.802, 0, 637, 625, 0, 0, 0, 0, 1054, 405)
 }
@@ -33,6 +34,7 @@ script = ExtResource("2_22e4n")
 
 [node name="MapNode" type="Node2D" parent="."]
 position = Vector2(543, 335)
+metadata/_edit_lock_ = true
 
 [node name="Map" parent="MapNode" instance=ExtResource("12_hq4f6")]
 position = Vector2(-543, -335)
@@ -139,5 +141,14 @@ offset_bottom = 60.0
 icon = ExtResource("4_xwyji")
 expand_icon = true
 
+[node name="BakePointsButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 869.0
+offset_top = 7.0
+offset_right = 1013.0
+offset_bottom = 63.0
+text = "Get Points"
+
 [connection signal="pressed" from="Control/AddNodeButton" to="." method="_add_node_button_pressed"]
 [connection signal="pressed" from="Control/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="Control/BakePointsButton" to="PathManager" method="_on_bake_points_button_pressed"]

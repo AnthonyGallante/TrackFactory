@@ -20,6 +20,7 @@ func _ready() -> void:
 	#camera.position_smoothing_speed = 1.0
 	pass
 
+
 func _process(_delta: float) -> void:
 	
 	mouse_loc = get_global_mouse_position()

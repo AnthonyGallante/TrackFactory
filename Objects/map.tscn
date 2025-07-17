@@ -53,6 +53,12 @@ color = Color(0.854902, 0.85098, 0.905882, 1)
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -15000
+limit_top = -10000
+limit_right = 15000
+limit_bottom = 10000
+limit_smoothed = true
+editor_draw_limits = true
 
 [node name="PlainGrid" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0.317647)
