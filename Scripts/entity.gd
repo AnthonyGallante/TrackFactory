@@ -30,3 +30,6 @@ const EMOTE_DOTS_3 = preload("res://Assets/Art/Objects/kenney_emotes-pack/PNG/Ve
 const EMOTE_STAR = preload("res://Assets/Art/Objects/kenney_emotes-pack/PNG/Vector/Style 1/emote_star.png")
 const EMOTE_ALERT = preload("res://Assets/Art/Objects/kenney_emotes-pack/PNG/Vector/Style 1/emote_alert.png")
 const EMOTE_SWIRL = preload("res://Assets/Art/Objects/kenney_emotes-pack/PNG/Vector/Style 1/emote_swirl.png")
+
+enum STATE {IDLE, CONSTANT_VELOCITY, ACCELERATING, DECELERATING, WAITING, FINISHED}
+var state: STATE = STATE.IDLE

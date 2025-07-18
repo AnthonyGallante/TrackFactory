@@ -10,9 +10,14 @@ var coordinate: Vector2
 
 # CAMERA
 @onready var camera: Camera2D = $Camera2D
-const MINIMUM_ZOOM: Vector2 = Vector2(0.1, 0.1)
-const MAXIMUM_ZOOM: Vector2 = Vector2(125.0, 125.0)
+@onready var loc_indicator: Sprite2D = $Camera2D/LocIndicator
+
+const MINIMUM_ZOOM := Vector2(0.1, 0.1)
+const MAXIMUM_ZOOM := Vector2(125.0, 125.0)
+
+var is_panning := false
 var scroll_pace := Vector2(0.25, 0.25)
+var last_mouse_position := Vector2()
 
 
 func _ready() -> void:
@@ -83,6 +88,8 @@ func _control_scroll() -> void:
 			camera.zoom = MINIMUM_ZOOM
 		else:
 			camera.zoom -= camera.zoom * scroll_pace
+	
+	loc_indicator.scale = Vector2.ONE / camera.zoom
 
 
 func _control_grid():
@@ -90,7 +97,18 @@ func _control_grid():
 	$PlainGrid.modulate.a = (camera.zoom.x / 50) - 0.25
 
 
-# TODO: Fix this lol
 func _control_pan():
-	if Input.is_action_pressed("middle_click"):
-		camera.global_position -= mouse_loc
+	if Input.is_action_just_pressed("middle_click"):
+		is_panning = true
+		last_mouse_position = get_viewport().get_mouse_position()
+	
+	if Input.is_action_just_released("middle_click"):
+		is_panning = false
+		loc_indicator.visible = false
+	
+	if is_panning:
+		loc_indicator.visible = true
+		var current_mouse_position = get_viewport().get_mouse_position()
+		var delta = current_mouse_position - last_mouse_position
+		camera.position -= delta / camera.zoom
+		last_mouse_position = current_mouse_position

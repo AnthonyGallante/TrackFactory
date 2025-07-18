@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://nxm00lmjjje8"]
+[gd_scene load_steps=16 format=3 uid="uid://nxm00lmjjje8"]
 
 [ext_resource type="Script" uid="uid://d3jkrcn3rpit8" path="res://Scenes/application_page.gd" id="1_gdmv6"]
 [ext_resource type="PackedScene" uid="uid://bvq2nvy84cxg5" path="res://Objects/draggable_object.tscn" id="1_ivqe8"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://d1ojpkmkjgeo1" path="res://addons/linepath2d/linepath2d.gd" id="5_o7ptd"]
 [ext_resource type="Script" uid="uid://eh165exkh7nf" path="res://Scripts/mouse_latitude.gd" id="5_si36r"]
 [ext_resource type="PackedScene" uid="uid://c5gklkq6v2vrr" path="res://Objects/map.tscn" id="12_hq4f6"]
+[ext_resource type="Texture2D" uid="uid://cwhckvsg4u6rg" path="res://Assets/Art/UI/kenney_game-icons/PNG/White/2x/right.png" id="13_si36r"]
 
 [sub_resource type="Curve2D" id="Curve2D_gdmv6"]
 bake_interval = 10.0
@@ -33,14 +34,11 @@ script = ExtResource("1_gdmv6")
 script = ExtResource("2_22e4n")
 
 [node name="MapNode" type="Node2D" parent="."]
-position = Vector2(543, 335)
 metadata/_edit_lock_ = true
 
 [node name="Map" parent="MapNode" instance=ExtResource("12_hq4f6")]
-position = Vector2(-543, -335)
 
 [node name="LinePath2D" type="Path2D" parent="MapNode"]
-position = Vector2(-604, -475)
 curve = SubResource("Curve2D_gdmv6")
 script = ExtResource("5_o7ptd")
 _curve = SubResource("Curve2D_gdmv6")
@@ -52,35 +50,29 @@ fill_texture_mode = 2
 cap_begin_cap = 1
 cap_end_cap = 1
 metadata/_custom_type_script = "uid://d1ojpkmkjgeo1"
+metadata/_edit_lock_ = true
 
 [node name="PathFollow2D" type="PathFollow2D" parent="MapNode/LinePath2D"]
 position = Vector2(186.386, 398.966)
 rotates = false
+metadata/_edit_lock_ = true
 
 [node name="Entity" parent="MapNode/LinePath2D/PathFollow2D" instance=ExtResource("5_gdmv6")]
+metadata/_edit_lock_ = true
 
 [node name="StartFlag" parent="MapNode" instance=ExtResource("1_ivqe8")]
-position = Vector2(-442, -71)
+position = Vector2(-128, 0)
 is_start = true
 sprite = ExtResource("4_rit3c")
 
 [node name="EndFlag" parent="MapNode" instance=ExtResource("1_ivqe8")]
-position = Vector2(477, -74)
+position = Vector2(128, 1)
 is_end = true
 sprite = ExtResource("2_rbgls")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_right = 1152.0
-offset_bottom = 649.0
-grow_horizontal = 2
-mouse_filter = 2
+[node name="Control" type="CanvasLayer" parent="."]
 
 [node name="Utility Panel" type="Panel" parent="Control"]
-layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -90,9 +82,9 @@ offset_right = 571.0
 offset_bottom = 65.0
 grow_horizontal = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="Information Panel" type="Panel" parent="Control"]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -105,6 +97,7 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="MouseCoordinates" type="Label" parent="Control/Information Panel"]
 layout_mode = 1
@@ -112,43 +105,54 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 5.0
-offset_top = -11.0
+offset_top = -30.0
 offset_right = 169.0
-offset_bottom = 21.0
+offset_bottom = 29.0
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.362829, 0.362829, 0.362829, 1)
+theme_override_colors/font_color = Color(0.720467, 0.720468, 0.720467, 1)
 text = "Lat, Lon"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("5_si36r")
+metadata/_edit_lock_ = true
 
 [node name="AddNodeButton" type="Button" parent="Control"]
 z_index = 100
-layout_mode = 0
+offset_left = 1025.0
+offset_top = 78.0
+offset_right = 1075.0
+offset_bottom = 128.0
+icon = ExtResource("2_65sjf")
+expand_icon = true
+metadata/_edit_lock_ = true
+
+[node name="ResetButton" type="Button" parent="Control"]
 offset_left = 1089.0
 offset_top = 78.0
 offset_right = 1139.0
 offset_bottom = 128.0
-icon = ExtResource("2_65sjf")
-expand_icon = true
-
-[node name="ResetButton" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 1089.0
-offset_top = 10.0
-offset_right = 1139.0
-offset_bottom = 60.0
 icon = ExtResource("4_xwyji")
 expand_icon = true
+metadata/_edit_lock_ = true
 
 [node name="BakePointsButton" type="Button" parent="Control"]
-layout_mode = 0
 offset_left = 869.0
 offset_top = 7.0
 offset_right = 1013.0
 offset_bottom = 63.0
 text = "Get Points"
 
+[node name="StartMovementButton" type="Button" parent="Control"]
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 133.0
+offset_bottom = 61.0
+text = "Start"
+icon = ExtResource("13_si36r")
+expand_icon = true
+metadata/_edit_lock_ = true
+
 [connection signal="pressed" from="Control/AddNodeButton" to="." method="_add_node_button_pressed"]
 [connection signal="pressed" from="Control/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="Control/BakePointsButton" to="PathManager" method="_on_bake_points_button_pressed"]
+[connection signal="pressed" from="Control/StartMovementButton" to="PathManager" method="_on_start_movement_button_pressed"]

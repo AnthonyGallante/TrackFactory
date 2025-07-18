@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbt1cii742nhn"]
+[gd_scene load_steps=8 format=3 uid="uid://cbt1cii742nhn"]
 
 [ext_resource type="Texture2D" uid="uid://codw651cyn53k" path="res://Assets/Art/Objects/Shapes/circle.png" id="1_hai32"]
 [ext_resource type="Script" uid="uid://dvidlfkjr7baf" path="res://UI/node_menu.gd" id="1_jnk6n"]
 [ext_resource type="Texture2D" uid="uid://kmqdytitx56" path="res://Assets/Art/UI/kenney_ui-pack/PNG/Green/Double/check_square_color_checkmark.png" id="2_65ddq"]
 [ext_resource type="Texture2D" uid="uid://b0qcpl26ls4xc" path="res://Assets/Art/Objects/Shapes/triangle_up.png" id="2_lghjf"]
+[ext_resource type="Texture2D" uid="uid://o3m0btyrvjjh" path="res://Assets/Art/UI/kenney_game-icons/PNG/White/2x/gear.png" id="2_rmn0a"]
 [ext_resource type="Texture2D" uid="uid://uo27m4r45iev" path="res://Assets/Art/Objects/Shapes/square.png" id="3_rgo66"]
 [ext_resource type="Texture2D" uid="uid://beg6inp1fogqa" path="res://Assets/Art/UI/kenney_ui-pack/PNG/Red/Double/check_square_color_cross.png" id="6_rmn0a"]
 
@@ -37,6 +38,19 @@ grow_horizontal = 2
 text = "Select Node"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="NodeInfoButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -53.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = 53.0
+grow_horizontal = 0
+icon = ExtResource("2_rmn0a")
+expand_icon = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
