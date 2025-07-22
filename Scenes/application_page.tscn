@@ -15,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://cwhckvsg4u6rg" path="res://Assets/Art/UI/kenney_game-icons/PNG/White/2x/right.png" id="13_si36r"]
 
 [sub_resource type="Curve2D" id="Curve2D_gdmv6"]
-bake_interval = 10.0
 _data = {
 "points": PackedVector2Array(0, 0, 400, 0, 186.386, 398.966, -242.802, 0, 242.802, 0, 637, 625, 0, 0, 0, 0, 1054, 405)
 }

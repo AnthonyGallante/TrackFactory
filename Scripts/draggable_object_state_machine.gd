@@ -1,8 +1,11 @@
 extends Node2D
 
-# State Machine
+# State Machines
 enum State {IDLE, DRAGGING, MENU_OPEN}
 var current_state: State = State.IDLE
+
+enum NodeType {START, CONST_V, ACCELERATE, DWELL, END}
+var current_type: NodeType
 
 # Exports
 @export var is_start:bool = false
@@ -51,6 +54,7 @@ var viewport
 func _ready() -> void:
 	
 	find_map()
+	update_type()
 	
 	sprite_2d.texture = sprite
 	sprite_2d.scale = Vector2(1, 1) * sprite_scale
@@ -75,7 +79,7 @@ func _process(_delta: float) -> void:
 			_process_dragging_state()
 		State.MENU_OPEN:
 			_process_menu_open_state()
-			
+		
 	if is_hovering:
 		type_label.text = sprite_2d.texture.resource_path
 		type_label.visible = true
@@ -85,6 +89,7 @@ func _process(_delta: float) -> void:
 		$TruePosition/Coordinates. visible = false
 		
 	get_node_latlon()
+	update_type()
 	
 	scale = Vector2.ONE / map_node.camera.zoom
 	if map_node.camera.zoom < Vector2.ONE * 5.0:
@@ -173,6 +178,28 @@ func _cancel_dragging() -> void:
 # MENU FUNCTIONS
 # ==============================================================================
 
+func update_type() -> void:
+	match sprite_2d.texture.resource_path:
+		"res://Assets/Art/Objects/Shapes/circle.png":
+			current_type = NodeType.CONST_V
+			type_label.text = "Constant Velocity"
+		"res://Assets/Art/Objects/Shapes/square.png":
+			current_type = NodeType.DWELL
+			type_label.text = "Dwell"
+		"res://Assets/Art/Objects/Shapes/triangle_up.png":
+			current_type = NodeType.ACCELERATE
+			type_label.text = "Accelerate"
+		"res://Assets/Art/Objects/Shapes/start_flag.png":
+			current_type = NodeType.START
+			type_label.text = "Start Position"
+		"res://Assets/Art/Objects/Shapes/stop_flag.png":
+			current_type = NodeType.END
+			type_label.text = "End Position"
+		_:
+			current_type = NodeType.CONST_V
+			type_label.text = " "
+
+
 func _open_menu() -> void:
 	node_menu.visible = true
 	node_menu.scale = Vector2(0.01, 0.01)
@@ -194,6 +221,7 @@ func _close_menu() -> void:
 # ==============================================================================
 # HELPER FUNCTIONS
 # ==============================================================================
+
 
 func reset_tween() -> void:
 	if tween:
