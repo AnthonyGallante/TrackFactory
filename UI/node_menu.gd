@@ -19,18 +19,6 @@ func _ready() -> void:
 
 func _check_parent_node():
 	var shape = parent.sprite_2d.texture.resource_path
-	
-	match shape:
-		CIRCLE.resource_path:
-			pass
-		SQUARE.resource_path:
-			pass
-		TRIANGLE_UP.resource_path:
-			pass
-		START_FLAG.resource_path:
-			pass
-		STOP_FLAG.resource_path:
-			pass
 	return shape
 
 
@@ -56,19 +44,23 @@ func _on_switch_node_dwell_button_down() -> void:
 
 func _on_delete_button_down() -> void:
 	# Before we delete the point, we check if this point is even in the path.
-	if parent in path_manager.additional_points:
-		path_manager.remove_point_at_index(path_manager.additional_points[parent] + 1)
-		path_manager.additional_points.erase(parent)
+	if parent in path_manager.path_nodes:
+		path_manager.remove_node_at_index(path_manager.path_nodes[parent] + 1)
+		path_manager.path_nodes.erase(parent)
 	parent.queue_free()
 
 
 func _on_add_node_here_button_down() -> void:
 	# Before we add the point, we check if this point is already in the path.
-	if parent not in path_manager.additional_points:
+	if parent not in path_manager.path_nodes:
 		# Get the index that we will fill
-		var most_recently_filled_index = len(path_manager.additional_points)
-		path_manager.additional_points[parent] = most_recently_filled_index
+		var most_recently_filled_index = len(path_manager.path_nodes)
+		path_manager.path_nodes[parent] = most_recently_filled_index
 		
-		path_manager.add_point_at_index(parent.true_position.global_position, most_recently_filled_index + 1)
+		path_manager.add_node_at_index(parent.true_position.global_position, most_recently_filled_index + 1)
 	else:
 		print('Node is already added to the path.')
+
+
+func _on_node_info_button_button_down() -> void:
+	Global.open_node_settings.emit(parent)

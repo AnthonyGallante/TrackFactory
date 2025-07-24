@@ -21,8 +21,6 @@ var last_mouse_position := Vector2()
 
 
 func _ready() -> void:
-	#camera.position_smoothing_enabled = true
-	#camera.position_smoothing_speed = 1.0
 	pass
 
 
@@ -34,8 +32,6 @@ func _process(_delta: float) -> void:
 	_control_scroll()
 	_control_pan()
 	_control_grid()
-	
-	#prints("Distance from Equator (m)", haversine(0, 0, coordinate.x, coordinate.y))
 
 
 func latlon_to_pixel(latitude: float, longitude: float) -> Vector2:

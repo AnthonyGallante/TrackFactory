@@ -1,5 +1,7 @@
 extends Node
 
+signal open_node_settings(parent_node)
+
 var most_recently_entered_node
 var menu_button_recently_pressed
 

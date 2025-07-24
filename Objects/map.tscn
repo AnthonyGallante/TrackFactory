@@ -59,7 +59,7 @@ limit_top = -10000
 limit_right = 15000
 limit_bottom = 10000
 limit_smoothed = true
-position_smoothing_speed = 60.0
+position_smoothing_speed = 50.0
 editor_draw_limits = true
 
 [node name="LocIndicator" type="Sprite2D" parent="Camera2D"]

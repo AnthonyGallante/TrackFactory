@@ -16,6 +16,12 @@ var current_type: NodeType
 @export var hover_scale = 1.10
 @export var scaling_time = 0.08
 
+# Required Properties
+@export var time_offset: float = 0.0        # Offset added by Dwell properties              : s
+@export var acceleration: float = 0.0       # Acceleration added by Acceleration properties : m/s^2
+@export var initial_velocity: float = 0.0   # Velocity of entity entering the node          : m/s
+@export var command_velocity: float = 10.0  # The target velocity of the entity             : m/s
+
 # Node references
 @onready var node_menu: Control = $NodeMenu
 @onready var area_2d: Area2D = $Area2D
@@ -277,6 +283,11 @@ func find_map():
 func get_node_latlon():
 	var latlon = map_node.pixel_to_latlon(true_position.global_position.x, true_position.global_position.y)
 	$TruePosition/Coordinates.text = "(%.5f, %.5f)" % [latlon.x, latlon.y]
+
+
+func get_type():
+	return NodeType.keys()[current_type]
+
 
 # ==============================================================================
 # SIGNALS

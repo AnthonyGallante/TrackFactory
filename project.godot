@@ -29,6 +29,21 @@ mouse_cursor/custom_image="uid://b22l4jvr1lkxv"
 
 enabled=PackedStringArray("res://addons/linepath2d/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://Assets/Art/": "red",
+"res://Assets/Art/UI/": "green",
+"res://Assets/Art/UI/kenney_game-icons/": "green",
+"res://Assets/Audio/": "orange",
+"res://Objects/": "blue",
+"res://Scenes/": "yellow",
+"res://Scripts/": "pink",
+"res://UI/": "green",
+"res://addons/": "gray",
+"res://loading/": "gray"
+}
+
 [global_group]
 
 draggable="This object can be dragged and dropped."

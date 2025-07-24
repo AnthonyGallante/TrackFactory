@@ -106,6 +106,7 @@ icon = ExtResource("6_rmn0a")
 alignment = 0
 expand_icon = true
 
+[connection signal="button_down" from="Panel/NodeInfoButton" to="." method="_on_node_info_button_button_down"]
 [connection signal="button_down" from="Panel/VBoxContainer/AddNodeHere" to="." method="_on_add_node_here_button_down"]
 [connection signal="button_down" from="Panel/VBoxContainer/SwitchNodeConstantVelocity" to="." method="_on_switch_node_constant_velocity_button_down"]
 [connection signal="button_down" from="Panel/VBoxContainer/SwitchNodeAcceleration" to="." method="_on_switch_node_acceleration_button_down"]

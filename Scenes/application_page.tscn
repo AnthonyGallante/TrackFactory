@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://nxm00lmjjje8"]
+[gd_scene load_steps=19 format=3 uid="uid://nxm00lmjjje8"]
 
 [ext_resource type="Script" uid="uid://d3jkrcn3rpit8" path="res://Scenes/application_page.gd" id="1_gdmv6"]
 [ext_resource type="PackedScene" uid="uid://bvq2nvy84cxg5" path="res://Objects/draggable_object.tscn" id="1_ivqe8"]
@@ -11,8 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://bvp84jer8nir8" path="res://Assets/Textures/path2dtexture.png" id="5_l7mws"]
 [ext_resource type="Script" uid="uid://d1ojpkmkjgeo1" path="res://addons/linepath2d/linepath2d.gd" id="5_o7ptd"]
 [ext_resource type="Script" uid="uid://eh165exkh7nf" path="res://Scripts/mouse_latitude.gd" id="5_si36r"]
+[ext_resource type="Script" uid="uid://6mfs2cjlonky" path="res://Scripts/menu_bar.gd" id="10_nrqfy"]
 [ext_resource type="PackedScene" uid="uid://c5gklkq6v2vrr" path="res://Objects/map.tscn" id="12_hq4f6"]
 [ext_resource type="Texture2D" uid="uid://cwhckvsg4u6rg" path="res://Assets/Art/UI/kenney_game-icons/PNG/White/2x/right.png" id="13_si36r"]
+[ext_resource type="PackedScene" uid="uid://xi8ynypr3s3d" path="res://UI/node_settings.tscn" id="14_seain"]
 
 [sub_resource type="Curve2D" id="Curve2D_gdmv6"]
 _data = {
@@ -25,6 +27,9 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 metadata/_snap_enabled = true
 metadata/_snap_count = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seain"]
+bg_color = Color(0.137255, 0.168627, 0.176471, 1)
 
 [node name="ApplicationPage" type="Node2D"]
 script = ExtResource("1_gdmv6")
@@ -63,25 +68,46 @@ metadata/_edit_lock_ = true
 position = Vector2(-128, 0)
 is_start = true
 sprite = ExtResource("4_rit3c")
+metadata/_edit_lock_ = true
 
 [node name="EndFlag" parent="MapNode" instance=ExtResource("1_ivqe8")]
-position = Vector2(128, 1)
 is_end = true
 sprite = ExtResource("2_rbgls")
+metadata/_edit_lock_ = true
 
-[node name="Control" type="CanvasLayer" parent="."]
+[node name="Toolbar" type="CanvasLayer" parent="."]
 
-[node name="Utility Panel" type="Panel" parent="Control"]
+[node name="ToolbarPanel" type="Panel" parent="Toolbar"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -571.0
-offset_top = 5.0
-offset_right = 571.0
-offset_bottom = 65.0
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 41.0
 grow_horizontal = 2
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_seain")
 metadata/_edit_lock_ = true
+
+[node name="MenuBar" type="MenuBar" parent="Toolbar"]
+offset_left = 10.0
+offset_right = 580.0
+offset_bottom = 40.0
+flat = true
+script = ExtResource("10_nrqfy")
+
+[node name="File" type="PopupMenu" parent="Toolbar/MenuBar"]
+title = "File"
+
+[node name="Settings" type="PopupMenu" parent="Toolbar/MenuBar"]
+auto_translate_mode = 1
+title = "Settings"
+
+[node name="Help" type="PopupMenu" parent="Toolbar/MenuBar"]
+auto_translate_mode = 1
+title = "Help"
+
+[node name="Control" type="CanvasLayer" parent="."]
 
 [node name="Information Panel" type="Panel" parent="Control"]
 anchors_preset = 7
@@ -118,38 +144,38 @@ metadata/_edit_lock_ = true
 [node name="AddNodeButton" type="Button" parent="Control"]
 z_index = 100
 offset_left = 1025.0
-offset_top = 78.0
+offset_top = 45.0
 offset_right = 1075.0
-offset_bottom = 128.0
+offset_bottom = 95.0
 icon = ExtResource("2_65sjf")
 expand_icon = true
-metadata/_edit_lock_ = true
 
 [node name="ResetButton" type="Button" parent="Control"]
 offset_left = 1089.0
-offset_top = 78.0
+offset_top = 45.0
 offset_right = 1139.0
-offset_bottom = 128.0
+offset_bottom = 95.0
 icon = ExtResource("4_xwyji")
 expand_icon = true
-metadata/_edit_lock_ = true
 
 [node name="BakePointsButton" type="Button" parent="Control"]
-offset_left = 869.0
-offset_top = 7.0
-offset_right = 1013.0
-offset_bottom = 63.0
+offset_left = 880.0
+offset_top = 46.0
+offset_right = 1005.0
+offset_bottom = 77.0
 text = "Get Points"
 
 [node name="StartMovementButton" type="Button" parent="Control"]
-offset_left = 12.0
-offset_top = 11.0
-offset_right = 133.0
-offset_bottom = 61.0
+offset_left = 750.0
+offset_top = 46.0
+offset_right = 871.0
+offset_bottom = 77.0
 text = "Start"
 icon = ExtResource("13_si36r")
 expand_icon = true
-metadata/_edit_lock_ = true
+
+[node name="NodeSettings" parent="Control" instance=ExtResource("14_seain")]
+position = Vector2(1450, 337)
 
 [connection signal="pressed" from="Control/AddNodeButton" to="." method="_add_node_button_pressed"]
 [connection signal="pressed" from="Control/ResetButton" to="." method="_on_reset_button_pressed"]

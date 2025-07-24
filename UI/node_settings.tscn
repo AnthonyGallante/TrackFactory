@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=3 uid="uid://xi8ynypr3s3d"]
+
+[ext_resource type="Texture2D" uid="uid://bypuym1aopd63" path="res://Assets/Art/UI/kenney_game-icons/PNG/White/2x/return.png" id="1_g71ib"]
+[ext_resource type="Script" uid="uid://bq6nkew5n4ta3" path="res://UI/node_settings.gd" id="1_jgof1"]
+
+[node name="NodeSettings" type="Node2D"]
+script = ExtResource("1_jgof1")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -199.0
+offset_top = -187.0
+offset_right = 199.0
+offset_bottom = 237.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="CloseMenuButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 2.5
+offset_right = 395.0
+offset_bottom = 52.5
+icon = ExtResource("1_g71ib")
+expand_icon = true
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.0
+offset_top = -137.0
+offset_right = 188.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+dragging_enabled = false
+dragger_visibility = 1
+drag_area_highlight_in_editor = true
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/HSplitContainer"]
+custom_minimum_size = Vector2(110, 50)
+layout_mode = 2
+text = "Velocity"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Panel/VBoxContainer/HSplitContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+value = 50.0
+scrollable = false
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+dragging_enabled = false
+dragger_visibility = 1
+drag_area_highlight_in_editor = true
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/HSplitContainer2"]
+custom_minimum_size = Vector2(110, 50)
+layout_mode = 2
+text = "Acceleration"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Panel/VBoxContainer/HSplitContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+value = 50.0
+scrollable = false
+
+[connection signal="pressed" from="Panel/CloseMenuButton" to="." method="_on_close_menu_button_pressed"]
