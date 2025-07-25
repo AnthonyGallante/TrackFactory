@@ -71,6 +71,7 @@ func remove_node_at_index(index: int = 1) -> void:
 
 
 func _on_bake_points_button_pressed() -> void:
+	
 	print("\n=== Creating Path ===\n")
 	
 	# Set the bake_interval 
@@ -104,6 +105,8 @@ func _on_bake_points_button_pressed() -> void:
 	for _d in d:
 		d_tot += _d
 	
+	var command_nodes := [start_flag]
+	
 	 # Get every node in the additional points dictionary
 	if len(path_nodes) == 0:
 		print("This path has 0 nodes. Entity will travel from START to END.")
@@ -113,26 +116,73 @@ func _on_bake_points_button_pressed() -> void:
 		
 		# START NODE HERE
 		
-		var i = 1
 		for p in path_nodes:
-			var p_pos = p.true_position.global_position
-			var p_offset = curve.get_closest_offset(p_pos)
-			var p_progress = curve.get_closest_offset(p_pos) / curve.get_baked_length()
-			var p_latlon = map.pixel_to_latlon(p_pos.x, p_pos.y)
-			
-			# Get the progress ratio for each node in the path
-			prints('  - Node:', i)
-			prints('     - Type:    ', p.get_type())
-			prints('     - Offset:  ', p_offset)
-			prints('     - Progress:', p_progress)
-			prints('     - Location:', p_latlon)
-			prints('     - Distance:', d_tot * p_progress)
-			prints('     - Index:   ', baked_progress.find(p_progress))
-			i += 1
-		
+			command_nodes.append(p)
+
 		# END NODE HERE
+
+	# Keeps track of the most recent node command for all points in our path
+	var command_list := [] 
+	var n_points := len(baked_progress)
+	
+	# Used for labelling purposes
+	var segment_progress := []
+	
+	command_list.resize(n_points)
+	command_list.fill(0)
+	
+	for command_node in command_nodes:
+		var node_pos: Vector2 = command_node.true_position.global_position
+		var node_loc: Vector2 = map.pixel_to_latlon(node_pos.x, node_pos.y)
+		var node_progress: float = curve.get_closest_offset(node_pos) / curve.get_baked_length()
+		var node_progress_index: float = baked_progress.find(node_progress)
+		var node_commands: Dictionary = get_node_commands(command_node)
 		
-	print(d)
+		prints('  - Node:', command_node)
+		prints('     - Type:    ', command_node.get_type())
+		prints('     - Progress:', node_progress)
+		prints('     - Location:', node_loc)
+		prints('     - Distance:', d_tot * node_progress)
+		prints('     - Index:   ', baked_progress.find(node_progress))
+		
+		segment_progress.append(node_progress)
+		
+		for progress_index in range(n_points):
+			if progress_index >= node_progress_index:
+				command_list[progress_index] = node_commands
+	
+	#print(command_list)
+	segment_progress.append(1.0)
+	#print(segment_progress)
+	
+	var segment_distances = get_segment_deltas(segment_progress, d_tot)
+	var segment_midpoint = get_segment_midpoints(segment_progress, curve)
+	print(segment_midpoint)
+	
+	#TODO: Make these labels nice
+	#for i in range(len(segment_midpoint)):
+		#print('PRINTING NEW LABEL')
+		#var label = Label.new()
+		#label.position = segment_midpoint[i]
+		#label.z_index = 2000
+		#label.text = str(segment_distances[i])
+		#add_child(label)
+
+
+func get_segment_midpoints(pct, curve):
+	var segment_midpoints := []
+	for i in range(1, len(pct)):
+		var midpoint = (pct[i] + pct[i-1]) / 2
+		var offset = curve.sample_baked(midpoint * curve.get_baked_length())
+		segment_midpoints.append(offset)
+	return segment_midpoints
+
+
+func get_segment_deltas(pct, dist):
+	var segment_midpoints := []
+	for i in range(1, len(pct)):
+		segment_midpoints.append((pct[i] - pct[i-1]) * dist)
+	return segment_midpoints
 
 
 func move_entity(delta):
@@ -184,29 +234,6 @@ func solve_for_time(dx: float, v: float, a: float) -> float:
 	return max(t1, t2)
 
 
-func dx_vector():
-	pass
-
-
-func v_command_vector():
-	pass
-
-
-func v_vector():
-	pass
-
-
-func a_vector():
-	pass
-
-
-func dt_vector():
-	pass
-
-
-func t_off_vector():
-	pass
-
-
-func t_vector():
-	pass
+func get_node_commands(node):
+	return {"Vi": node.vi, "Vf": node.vf, 'A': node.a, "Dwell": node.dwell}
+	

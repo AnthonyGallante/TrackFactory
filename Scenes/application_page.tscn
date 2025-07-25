@@ -109,38 +109,6 @@ title = "Help"
 
 [node name="Control" type="CanvasLayer" parent="."]
 
-[node name="Information Panel" type="Panel" parent="Control"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -571.0
-offset_top = -64.0
-offset_right = 571.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-metadata/_edit_lock_ = true
-
-[node name="MouseCoordinates" type="Label" parent="Control/Information Panel"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 5.0
-offset_top = -30.0
-offset_right = 169.0
-offset_bottom = 29.0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.720467, 0.720468, 0.720467, 1)
-text = "Lat, Lon"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("5_si36r")
-metadata/_edit_lock_ = true
-
 [node name="AddNodeButton" type="Button" parent="Control"]
 z_index = 100
 offset_left = 1025.0
@@ -176,6 +144,40 @@ expand_icon = true
 
 [node name="NodeSettings" parent="Control" instance=ExtResource("14_seain")]
 position = Vector2(1450, 337)
+
+[node name="Information" type="CanvasLayer" parent="."]
+
+[node name="ToolbarPanel" type="Panel" parent="Information"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -41.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_seain")
+metadata/_edit_lock_ = true
+
+[node name="MouseCoordinates" type="Label" parent="Information/ToolbarPanel"]
+z_index = 100
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = -40.0
+offset_right = 200.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.819608, 0.823529, 0.823529, 1)
+text = "Lat, Lon"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_si36r")
+metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="Control/AddNodeButton" to="." method="_add_node_button_pressed"]
 [connection signal="pressed" from="Control/ResetButton" to="." method="_on_reset_button_pressed"]

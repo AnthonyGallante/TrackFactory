@@ -16,11 +16,17 @@ var current_type: NodeType
 @export var hover_scale = 1.10
 @export var scaling_time = 0.08
 
+var default_dwell: float = 60.0
+var default_a: float = 2.0
+var default_vi: float = 10.0
+var default_vf: float = 10.0
+
 # Required Properties
-@export var time_offset: float = 0.0        # Offset added by Dwell properties              : s
-@export var acceleration: float = 0.0       # Acceleration added by Acceleration properties : m/s^2
-@export var initial_velocity: float = 0.0   # Velocity of entity entering the node          : m/s
-@export var command_velocity: float = 10.0  # The target velocity of the entity             : m/s
+@export_category("Node Commands")
+@export var dwell: float = default_dwell   # Offset added by Dwell properties              : s
+@export var a: float = default_a           # Acceleration added by Acceleration properties : m/s^2
+@export var vi: float = default_vi         # Velocity of entity entering the node          : m/s
+@export var vf: float = default_vf         # The target velocity of the entity             : m/s
 
 # Node references
 @onready var node_menu: Control = $NodeMenu
@@ -184,26 +190,49 @@ func _cancel_dragging() -> void:
 # MENU FUNCTIONS
 # ==============================================================================
 
+# TODO: Rewrite using resources
+# This has the potential to save a lot of code. However, the insight presented
+# itself to me at a stage in the project where, if I attempted to implement,
+# would break many dependencies and delay the project.
+# We write bad code. We learn new things. We move on. 
+func set_type_defaults(_vi: float, _vf: float, _a: float, _dwell: float) -> void:
+	vi = _vi
+	vf = _vf
+	a = _a
+	dwell = _dwell
+
+
 func update_type() -> void:
 	match sprite_2d.texture.resource_path:
 		"res://Assets/Art/Objects/Shapes/circle.png":
 			current_type = NodeType.CONST_V
 			type_label.text = "Constant Velocity"
+			set_type_defaults(default_vi, default_vf, 0.0, 0.0)
+			
 		"res://Assets/Art/Objects/Shapes/square.png":
 			current_type = NodeType.DWELL
 			type_label.text = "Dwell"
+			set_type_defaults(default_vi, default_vf, default_a, default_dwell)
+			
 		"res://Assets/Art/Objects/Shapes/triangle_up.png":
 			current_type = NodeType.ACCELERATE
 			type_label.text = "Accelerate"
+			set_type_defaults(default_vi, default_vf, default_a, 0.0)
+			
 		"res://Assets/Art/Objects/Shapes/start_flag.png":
 			current_type = NodeType.START
 			type_label.text = "Start Position"
+			set_type_defaults(default_vi, default_vf, default_a, 0.0)
+			
 		"res://Assets/Art/Objects/Shapes/stop_flag.png":
 			current_type = NodeType.END
 			type_label.text = "End Position"
+			set_type_defaults(0.0, 0.0, 0.0, 0.0)
+			
 		_:
 			current_type = NodeType.CONST_V
 			type_label.text = " "
+			set_type_defaults(0.0, 0.0, 0.0, 0.0)
 
 
 func _open_menu() -> void:
@@ -260,14 +289,16 @@ func unsuccessful_drop():
 
 
 func check_disable_buttons():
-	if is_start or is_end:
-		var buttons = [
+	
+	var buttons = [
 			get_node("NodeMenu/Panel/VBoxContainer/Delete"),
 			get_node("NodeMenu/Panel/VBoxContainer/SwitchNodeAcceleration"),
 			get_node("NodeMenu/Panel/VBoxContainer/SwitchNodeConstantVelocity"),
 			get_node("NodeMenu/Panel/VBoxContainer/SwitchNodeDwell"),
 			get_node("NodeMenu/Panel/VBoxContainer/AddNodeHere")
 		]
+	
+	if is_start or is_end:
 		for button in buttons:
 			button.disabled = true
 

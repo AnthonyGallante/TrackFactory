@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var close_pos := Vector2(1450.0, 337.0)
 @onready var open_pos := Vector2(950.0, 337.0)
+@onready var label: Label = $Panel/Label
 
 enum Status {OPEN, CLOSED}
 var status: Status = Status.CLOSED
@@ -17,6 +18,7 @@ func _ready() -> void:
 
 func _on_settings_opened(parent_node):
 	print(parent_node)
+	label.text = str(parent_node)
 	toggle_menu()
 
 

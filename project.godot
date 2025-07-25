@@ -22,6 +22,7 @@ Loading="*res://loading/loading.tscn"
 
 [display]
 
+window/size/borderless=true
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="uid://b22l4jvr1lkxv"
 
