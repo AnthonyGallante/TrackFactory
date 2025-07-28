@@ -7,7 +7,6 @@ extends Node2D
 @onready var line_path: Path2D = $"../MapNode/LinePath2D"
 @onready var path_follower: PathFollow2D = $"../MapNode/LinePath2D/PathFollow2D"
 @onready var entity: Node2D = $"../MapNode/LinePath2D/PathFollow2D/Entity"
-
 @onready var map: Node2D = $"../MapNode/Map"
 @onready var curve := line_path.curve
 
@@ -16,6 +15,11 @@ extends Node2D
 @onready var path_nodes := {}
 
 var moving := false
+
+var vi_cmd_vector: Array
+var vf_cmd_vector: Array
+var a_cmd_vector: Array
+var dwell_cmd_vector: Array
 
 func _ready() -> void:
 	reset_path()
@@ -42,6 +46,8 @@ func _process(_delta: float) -> void:
 	for node in path_nodes:
 		var index = path_nodes[node] + 1
 		curve.set_point_position(index, line_path.to_local(node.true_position.global_position))
+		curve.set_point_in(index, Vector2(node.curvature, 0.0))
+		curve.set_point_out(index, Vector2(-node.curvature, 0.0))
 
 
 func reset_path():
@@ -114,12 +120,12 @@ func _on_bake_points_button_pressed() -> void:
 	else:
 		prints("This path has", len(path_nodes), "nodes:")
 		
-		# START NODE HERE
+		# START NODE WOULD BE HERE
 		
 		for p in path_nodes:
 			command_nodes.append(p)
 
-		# END NODE HERE
+		# END NODE WOULD BE HERE
 
 	# Keeps track of the most recent node command for all points in our path
 	var command_list := [] 
@@ -159,7 +165,7 @@ func _on_bake_points_button_pressed() -> void:
 	var segment_midpoint = get_segment_midpoints(segment_progress, curve)
 	print(segment_midpoint)
 	
-	#TODO: Make these labels nice
+	# TODO:  Make these labels nice [OPTIONAL]
 	#for i in range(len(segment_midpoint)):
 		#print('PRINTING NEW LABEL')
 		#var label = Label.new()
@@ -167,6 +173,20 @@ func _on_bake_points_button_pressed() -> void:
 		#label.z_index = 2000
 		#label.text = str(segment_distances[i])
 		#add_child(label)
+	
+	vi_cmd_vector.resize(n_points)
+	vf_cmd_vector.resize(n_points)
+	a_cmd_vector.resize(n_points)
+	dwell_cmd_vector.resize(n_points)
+	
+	for i in range(n_points):
+		var __ = command_list[i]
+		vi_cmd_vector[i] = __['Vi']
+		vf_cmd_vector[i] = __['Vf']
+		a_cmd_vector[i] = __['A']
+		dwell_cmd_vector[i] = __['Dwell']
+		
+	print(vf_cmd_vector)
 
 
 func get_segment_midpoints(pct, curve):

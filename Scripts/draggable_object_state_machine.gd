@@ -45,6 +45,7 @@ var body_ref
 var drag_offset
 var start_location
 var target_position
+var curvature := 0.0
 
 var tween: Tween
 var menu_tween: Tween
