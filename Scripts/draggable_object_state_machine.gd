@@ -16,17 +16,10 @@ var current_type: NodeType
 @export var hover_scale = 1.10
 @export var scaling_time = 0.08
 
-var default_dwell: float = 60.0
-var default_a: float = 2.0
-var default_vi: float = 10.0
-var default_vf: float = 10.0
-
-# Required Properties
-@export_category("Node Commands")
-@export var dwell: float = default_dwell   # Offset added by Dwell properties              : s
-@export var a: float = default_a           # Acceleration added by Acceleration properties : m/s^2
-@export var vi: float = default_vi         # Velocity of entity entering the node          : m/s
-@export var vf: float = default_vf         # The target velocity of the entity             : m/s
+@onready var dwell: float = 60.0   # Offset added by Dwell properties              : s
+@onready var a: float = 2.0        # Acceleration added by Acceleration properties : m/s^2
+@onready var vi: float = 10.0      # Velocity of entity entering the node          : m/s
+@onready var vf: float = 10.0      # The target velocity of the entity             : m/s     
 
 # Node references
 @onready var node_menu: Control = $NodeMenu
@@ -81,6 +74,7 @@ func _ready() -> void:
 	start_location = global_position
 	area_2d.input_pickable = true
 	check_disable_buttons()
+	
 
 
 func _process(_delta: float) -> void:
@@ -208,22 +202,22 @@ func update_type() -> void:
 		"res://Assets/Art/Objects/Shapes/circle.png":
 			current_type = NodeType.CONST_V
 			type_label.text = "Constant Velocity"
-			set_type_defaults(default_vi, default_vf, 0.0, 0.0)
+			set_type_defaults(vi, vf, 0.0, 0.0)
 			
 		"res://Assets/Art/Objects/Shapes/square.png":
 			current_type = NodeType.DWELL
 			type_label.text = "Dwell"
-			set_type_defaults(default_vi, default_vf, default_a, default_dwell)
+			set_type_defaults(vi, vf, a, dwell)
 			
 		"res://Assets/Art/Objects/Shapes/triangle_up.png":
 			current_type = NodeType.ACCELERATE
 			type_label.text = "Accelerate"
-			set_type_defaults(default_vi, default_vf, default_a, 0.0)
+			set_type_defaults(vi, vf, a, 0.0)
 			
 		"res://Assets/Art/Objects/Shapes/start_flag.png":
 			current_type = NodeType.START
 			type_label.text = "Start Position"
-			set_type_defaults(default_vi, default_vf, default_a, 0.0)
+			set_type_defaults(vi, vf, a, 0.0)
 			
 		"res://Assets/Art/Objects/Shapes/stop_flag.png":
 			current_type = NodeType.END
@@ -253,6 +247,11 @@ func _close_menu() -> void:
 	menu_tween.tween_property(node_menu, "scale", Vector2(0.01, 0.01), 0.04)
 	await menu_tween.finished
 	node_menu.visible = false
+	
+	Global.is_currently_dragging = false
+	is_hovering = false
+	Input.set_custom_mouse_cursor(Global.CURSOR_NONE)
+	_transition_to_idle()
 
 # ==============================================================================
 # HELPER FUNCTIONS

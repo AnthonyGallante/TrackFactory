@@ -46,8 +46,8 @@ func _process(_delta: float) -> void:
 	for node in path_nodes:
 		var index = path_nodes[node] + 1
 		curve.set_point_position(index, line_path.to_local(node.true_position.global_position))
-		curve.set_point_in(index, Vector2(node.curvature, 0.0))
-		curve.set_point_out(index, Vector2(-node.curvature, 0.0))
+		curve.set_point_in(index, Vector2(-node.curvature, 0.0))
+		curve.set_point_out(index, Vector2(node.curvature, 0.0))
 
 
 func reset_path():
@@ -181,19 +181,24 @@ func _on_bake_points_button_pressed() -> void:
 	
 	for i in range(n_points):
 		var __ = command_list[i]
-		vi_cmd_vector[i] = __['Vi']
 		vf_cmd_vector[i] = __['Vf']
-		a_cmd_vector[i] = __['A']
+		vi_cmd_vector[i] = __['Vi']
+		
+		if __['Vi'] != __['Vf']:
+			a_cmd_vector[i] = __['A']
+		else:
+			a_cmd_vector[i] = 0.0
+			
 		dwell_cmd_vector[i] = __['Dwell']
 		
 	print(vf_cmd_vector)
 
 
-func get_segment_midpoints(pct, curve):
+func get_segment_midpoints(pct, _curve):
 	var segment_midpoints := []
 	for i in range(1, len(pct)):
 		var midpoint = (pct[i] + pct[i-1]) / 2
-		var offset = curve.sample_baked(midpoint * curve.get_baked_length())
+		var offset = _curve.sample_baked(midpoint * _curve.get_baked_length())
 		segment_midpoints.append(offset)
 	return segment_midpoints
 

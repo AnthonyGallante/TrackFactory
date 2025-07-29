@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://xi8ynypr3s3d"]
+[gd_scene load_steps=4 format=3 uid="uid://xi8ynypr3s3d"]
 
 [ext_resource type="Script" uid="uid://bq6nkew5n4ta3" path="res://UI/node_settings.gd" id="1_jgof1"]
-[ext_resource type="Texture2D" uid="uid://ch1mndvgl2026" path="res://Assets/Art/UI/kenney_game-icons/PNG/White/2x/exitRight.png" id="2_jgof1"]
+[ext_resource type="Texture2D" uid="uid://bb5646o4gtoml" path="res://Assets/Art/UI/kenney_cursor-pack/PNG/Outline/Double/cross_small.png" id="2_jgof1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2obpy"]
+bg_color = Color(0.129412, 0.129412, 0.129412, 1)
 
 [node name="NodeSettings" type="Node2D"]
 script = ExtResource("1_jgof1")
@@ -18,16 +21,6 @@ offset_right = 199.0
 offset_bottom = 237.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
-
-[node name="CloseMenuButton" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 345.0
-offset_top = 2.5
-offset_right = 395.0
-offset_bottom = 52.5
-icon = ExtResource("2_jgof1")
-expand_icon = true
 metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
@@ -60,10 +53,11 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -2000.0
-max_value = 2000.0
+min_value = -500.0
+max_value = 500.0
 value = 50.0
 scrollable = false
+tick_count = 5
 
 [node name="CurveValue" type="Label" parent="Panel/VBoxContainer/Curvature"]
 custom_minimum_size = Vector2(99, 0)
@@ -71,25 +65,26 @@ layout_mode = 2
 text = "px"
 vertical_alignment = 1
 
-[node name="Velocity" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="VelocityInitial" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
 
-[node name="VelocityTitle" type="Label" parent="Panel/VBoxContainer/Velocity"]
+[node name="VelocityTitle" type="Label" parent="Panel/VBoxContainer/VelocityInitial"]
 custom_minimum_size = Vector2(99, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "Velocity"
+text = "Final Velocity"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="VelocitySlider" type="HSlider" parent="Panel/VBoxContainer/Velocity"]
+[node name="VelocitySlider" type="HSlider" parent="Panel/VBoxContainer/VelocityInitial"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 value = 10.0
 scrollable = false
+tick_count = 5
 
-[node name="VelocityValue" type="Label" parent="Panel/VBoxContainer/Velocity"]
+[node name="VelocityValue" type="Label" parent="Panel/VBoxContainer/VelocityInitial"]
 custom_minimum_size = Vector2(99, 0)
 layout_mode = 2
 text = "m/s"
@@ -114,11 +109,37 @@ min_value = -20.0
 max_value = 20.0
 value = 2.0
 scrollable = false
+tick_count = 5
 
 [node name="AccelerationValue" type="Label" parent="Panel/VBoxContainer/Acceleration"]
 custom_minimum_size = Vector2(99, 0)
 layout_mode = 2
 text = "m/s2"
+vertical_alignment = 1
+
+[node name="VelocityFinal" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="VelocityTitle" type="Label" parent="Panel/VBoxContainer/VelocityFinal"]
+custom_minimum_size = Vector2(99, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Initial Velocity"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VelocitySlider" type="HSlider" parent="Panel/VBoxContainer/VelocityFinal"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 10.0
+scrollable = false
+tick_count = 5
+
+[node name="VelocityValue" type="Label" parent="Panel/VBoxContainer/VelocityFinal"]
+custom_minimum_size = Vector2(99, 0)
+layout_mode = 2
+text = "m/s"
 vertical_alignment = 1
 
 [node name="Dwell" type="HBoxContainer" parent="Panel/VBoxContainer"]
@@ -139,6 +160,7 @@ size_flags_horizontal = 3
 max_value = 2000.0
 value = 60.0
 scrollable = false
+tick_count = 5
 
 [node name="DwellValue" type="Label" parent="Panel/VBoxContainer/Dwell"]
 custom_minimum_size = Vector2(99, 0)
@@ -147,21 +169,42 @@ text = "s"
 vertical_alignment = 1
 
 [node name="Label" type="Label" parent="Panel"]
+z_index = 50
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -199.0
+offset_top = 3.0
 offset_right = 199.0
-offset_bottom = 53.0
+offset_bottom = 33.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 20
 text = "Node"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="Panel/CloseMenuButton" to="." method="_on_close_menu_button_pressed"]
+[node name="Panel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_right = 398.0
+offset_bottom = 40.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_2obpy")
+
+[node name="CloseMenuButton" type="Button" parent="Panel"]
+z_index = 100
+layout_mode = 0
+offset_left = 365.0
+offset_top = 3.0
+offset_right = 395.0
+offset_bottom = 33.0
+icon = ExtResource("2_jgof1")
+expand_icon = true
+metadata/_edit_lock_ = true
+
 [connection signal="value_changed" from="Panel/VBoxContainer/Curvature/CurveSlider" to="." method="_on_curve_slider_value_changed"]
-[connection signal="value_changed" from="Panel/VBoxContainer/Velocity/VelocitySlider" to="." method="_on_velocity_slider_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/VelocityInitial/VelocitySlider" to="." method="_on_velocity_init_slider_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/Acceleration/AccelerationSlider" to="." method="_on_acceleration_slider_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/VelocityFinal/VelocitySlider" to="." method="_on_velocity_final_slider_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/Dwell/DwellSlider" to="." method="_on_dwell_slider_value_changed"]
+[connection signal="pressed" from="Panel/CloseMenuButton" to="." method="_on_close_menu_button_pressed"]
