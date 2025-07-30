@@ -72,7 +72,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(99, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "Final Velocity"
+text = "Initial Velocity"
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -105,9 +105,9 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -20.0
-max_value = 20.0
-value = 2.0
+min_value = -10.0
+max_value = 10.0
+step = 0.1
 scrollable = false
 tick_count = 5
 
@@ -124,7 +124,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(99, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "Initial Velocity"
+text = "Final Velocity"
 horizontal_alignment = 2
 vertical_alignment = 1
 

@@ -71,6 +71,7 @@ sprite = ExtResource("4_rit3c")
 metadata/_edit_lock_ = true
 
 [node name="EndFlag" parent="MapNode" instance=ExtResource("1_ivqe8")]
+position = Vector2(128, 0)
 is_end = true
 sprite = ExtResource("2_rbgls")
 metadata/_edit_lock_ = true

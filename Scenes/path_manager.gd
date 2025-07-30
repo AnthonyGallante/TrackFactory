@@ -21,6 +21,11 @@ var vf_cmd_vector: Array
 var a_cmd_vector: Array
 var dwell_cmd_vector: Array
 
+var dx_vector: Array
+var v_vector: Array
+var a_vector: Array
+var dt_vector: Array
+
 func _ready() -> void:
 	reset_path()
 
@@ -81,7 +86,7 @@ func _on_bake_points_button_pressed() -> void:
 	print("\n=== Creating Path ===\n")
 	
 	# Set the bake_interval 
-	curve.bake_interval = 1.0
+	curve.bake_interval = 0.05
 	
 	var b := []       # Array of Baked Points, in original pixels
 	var latlons := [] # Array of Baked Points, converted to latlon
@@ -129,7 +134,7 @@ func _on_bake_points_button_pressed() -> void:
 
 	# Keeps track of the most recent node command for all points in our path
 	var command_list := [] 
-	var n_points := len(baked_progress)
+	var n_points := len(d)
 	
 	# Used for labelling purposes
 	var segment_progress := []
@@ -179,6 +184,13 @@ func _on_bake_points_button_pressed() -> void:
 	a_cmd_vector.resize(n_points)
 	dwell_cmd_vector.resize(n_points)
 	
+	dx_vector = d
+	v_vector.resize(n_points)
+	a_vector.resize(n_points)
+	dt_vector.resize(n_points)
+	
+	# TODO: Overwrite calculated velocity with constant velocity nodes
+	
 	for i in range(n_points):
 		var __ = command_list[i]
 		vf_cmd_vector[i] = __['Vf']
@@ -188,10 +200,50 @@ func _on_bake_points_button_pressed() -> void:
 			a_cmd_vector[i] = __['A']
 		else:
 			a_cmd_vector[i] = 0.0
+		
+		if i > 0:
+			var _v = sqrt((v_vector[i-1] ** 2) + 2 * a_cmd_vector[i] * dx_vector[i])
 			
+			# Speeding up!
+			if _v <= __['Vf'] and a_cmd_vector[i] >= 0.0:
+				v_vector[i] = _v
+				a_vector[i] = a_cmd_vector[i]
+				
+			# Slowing down!
+			elif _v >= __['Vf'] and a_cmd_vector[i] <= 0.0:
+				v_vector[i] = _v
+				a_vector[i] = a_cmd_vector[i]
+				
+			# Not Accelerating!
+			elif a_cmd_vector[i] == 0.0:
+				v_vector[i] = __['Vf']
+				a_vector[i] = 0.0
+			# Acceleration == 0.0
+			else:
+				v_vector[i] = vf_cmd_vector[i]
+				a_vector[i] = 0.0
+			
+		# if i == 0:
+		else:
+			v_vector[i] = vi_cmd_vector[i]
+			a_vector[i] = a_cmd_vector[i]
+		
+		if __['A'] == 0.0:
+			v_vector[i] = __['Vf']
+		
 		dwell_cmd_vector[i] = __['Dwell']
 		
-	print(vf_cmd_vector)
+		if a_vector[i] != 0:
+			dt_vector[i] = solve_for_time(dx_vector[i], v_vector[i], a_vector[i])
+		else:
+			dt_vector[i] = dx_vector[i] / v_vector[i]
+		
+	#print(vi_cmd_vector)
+	#print(a_cmd_vector)
+	print("")
+	#print(vf_cmd_vector)
+	print('')
+	print(v_vector)
 
 
 func get_segment_midpoints(pct, _curve):

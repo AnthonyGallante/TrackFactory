@@ -51,8 +51,8 @@ func match_parent_type(parent_node):
 			return "Start Node"
 			
 		1: # CONST_V NODE
-			velocity_init_slider.editable = true
-			velocity_final_slider.editable = false
+			velocity_init_slider.editable = false
+			velocity_final_slider.editable = true
 			acceleration_slider.editable = false
 			dwell_slider.editable = false
 			return "Constant Velocity Node"
