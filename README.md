@@ -1,3 +1,5 @@
+<img width="1145" height="133" alt="Screenshot 2025-07-31 135815" src="https://github.com/user-attachments/assets/6dd95fc8-f13a-4900-811e-a1f80bd0d48d" />
+
 # Inspiration:
 https://movementecologyjournal.biomedcentral.com/articles/10.1186/s40462-020-00213-x
 
