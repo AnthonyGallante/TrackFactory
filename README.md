@@ -4,9 +4,10 @@ https://movementecologyjournal.biomedcentral.com/articles/10.1186/s40462-020-002
 In order to create robust and explainable machine leanring models, labelled data may be useful.
 
 # Work In Progress
-https://github.com/user-attachments/assets/519d2cb4-bd39-44b9-be9c-4be478575eaf
 
+## Building Tracks:
+https://github.com/user-attachments/assets/e6095e6a-f845-4724-a3c0-948751e093a4
 
-
-https://github.com/user-attachments/assets/ccf8ba45-b387-49eb-b57e-1e0a2a5e73d8
+## Getting Ground Truth Data:
+https://github.com/user-attachments/assets/5cf92ed6-2feb-4f26-97b6-ca1803eb1af1
 
