@@ -26,6 +26,8 @@ var v_vector: Array
 var a_vector: Array
 var dt_vector: Array
 
+const PLOT = preload("res://Objects/Plot.tscn")
+
 func _ready() -> void:
 	reset_path()
 
@@ -189,7 +191,7 @@ func _on_bake_points_button_pressed() -> void:
 	a_vector.resize(n_points)
 	dt_vector.resize(n_points)
 	
-	# TODO: Overwrite calculated velocity with constant velocity nodes
+	# TODO: CLEAN CLEAN CLEAN
 	
 	for i in range(n_points):
 		var __ = command_list[i]
@@ -243,8 +245,14 @@ func _on_bake_points_button_pressed() -> void:
 	print("")
 	#print(vf_cmd_vector)
 	print('')
-	print(v_vector)
-
+	#print(v_vector)
+	
+	# Handing information over to our plot
+	var plot = PLOT.instantiate()
+	plot.x_ticks = segment_progress
+	plot.x_axis = baked_progress
+	plot.y_axis = v_vector
+	add_child(plot)
 
 func get_segment_midpoints(pct, _curve):
 	var segment_midpoints := []

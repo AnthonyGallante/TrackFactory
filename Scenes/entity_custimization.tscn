@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh864ygsrvu1f"]
+
+[ext_resource type="Script" uid="uid://c5ruj1e0o1f7j" path="res://Scripts/entity_customization_menu_bar.gd" id="1_taupt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ux4nc"]
+bg_color = Color(0.137255, 0.168627, 0.176471, 1)
+
+[node name="EntityCustimization" type="Node2D"]
+
+[node name="Toolbar" type="CanvasLayer" parent="."]
+
+[node name="ToolbarPanel" type="Panel" parent="Toolbar"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 31.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ux4nc")
+metadata/_edit_lock_ = true
+
+[node name="MenuBar" type="MenuBar" parent="Toolbar"]
+offset_left = 10.0
+offset_right = 580.0
+offset_bottom = 40.0
+flat = true
+script = ExtResource("1_taupt")
+
+[node name="File" type="PopupMenu" parent="Toolbar/MenuBar"]
+auto_translate_mode = 1
+title = "File"
+
+[node name="Settings" type="PopupMenu" parent="Toolbar/MenuBar"]
+auto_translate_mode = 1
+title = "Settings"
+
+[node name="Help" type="PopupMenu" parent="Toolbar/MenuBar"]
+auto_translate_mode = 1
+title = "Help"

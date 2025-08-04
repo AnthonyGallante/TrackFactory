@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ckypo4jsjuepe"]
 
-[ext_resource type="Script" path="loading.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://cs551cnrh6mag" path="logo.png" id="2_7j08w"]
+[ext_resource type="Script" uid="uid://ddiyomg1d35bn" path="res://loading/loading.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://kkr1qm2o4lv3" path="res://loading/logo.png" id="2_7j08w"]
 
 [sub_resource type="Animation" id="7"]
 resource_name = "Postload"
@@ -73,8 +73,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p12k3"]
 _data = {
-"Postload": SubResource("7"),
-"Preload": SubResource("6")
+&"Postload": SubResource("7"),
+&"Preload": SubResource("6")
 }
 
 [node name="loading" type="CanvasLayer"]
@@ -138,5 +138,5 @@ max_value = 1.0
 unique_name_in_owner = true
 process_mode = 3
 libraries = {
-"": SubResource("AnimationLibrary_p12k3")
+&"": SubResource("AnimationLibrary_p12k3")
 }

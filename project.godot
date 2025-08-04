@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 Global="*res://Scripts/global.gd"
 Loading="*res://loading/loading.tscn"
+EntityProperties="*res://Scripts/entity_properties.gd"
+
+[debug]
+
+gdscript/warnings/unused_signal=0
 
 [display]
 

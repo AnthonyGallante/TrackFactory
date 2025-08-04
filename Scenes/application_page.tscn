@@ -132,7 +132,7 @@ offset_left = 880.0
 offset_top = 46.0
 offset_right = 1005.0
 offset_bottom = 77.0
-text = "Get Points"
+text = "📈 Plot Path"
 
 [node name="StartMovementButton" type="Button" parent="Control"]
 offset_left = 750.0

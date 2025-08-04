@@ -1,10 +1,26 @@
-[gd_scene format=3 uid="uid://bh64pkbvjcrik"]
+[gd_scene load_steps=7 format=3 uid="uid://bh64pkbvjcrik"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="Script" uid="uid://ncqjhqwhduu3" path="res://Scripts/plot.gd" id="1_4hy55"]
+[ext_resource type="Texture2D" uid="uid://yabiluq225qx" path="res://Assets/Textures/kenney_pattern-pack-2/PNG/Thin/Default (256px)/pattern_0017.png" id="1_o2nt0"]
+[ext_resource type="Texture2D" uid="uid://bnfxhmrbf60eg" path="res://Assets/Art/Objects/Shapes/start_flag.png" id="2_qmtt4"]
+[ext_resource type="Texture2D" uid="uid://b0qcpl26ls4xc" path="res://Assets/Art/Objects/Shapes/triangle_up.png" id="3_cy043"]
+[ext_resource type="Texture2D" uid="uid://ccqs14l2lkj0h" path="res://Assets/Art/Objects/Shapes/stop_flag.png" id="4_cy043"]
+[ext_resource type="Texture2D" uid="uid://bvp84jer8nir8" path="res://Assets/Textures/path2dtexture.png" id="5_1f5t5"]
 
-[node name="Background" type="Node2D" parent="."]
+[node name="PlotWindow" type="Window"]
+title = "Velocity Path"
+initial_position = 1
+size = Vector2i(651, 360)
+unresizable = true
+script = ExtResource("1_4hy55")
 
-[node name="ColorRect" type="ColorRect" parent="Background"]
+[node name="Plot" type="Node2D" parent="."]
+position = Vector2(325.5, 156)
+
+[node name="Background" type="Node2D" parent="Plot"]
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Plot/Background"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -16,17 +32,110 @@ offset_right = 325.5
 offset_bottom = 219.5
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.266667, 0.266667, 0.266667, 1)
+metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="Background/ColorRect"]
+[node name="TextureRect" type="TextureRect" parent="Plot/Background/ColorRect"]
+modulate = Color(1, 1, 1, 0.0392157)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -325.5
-offset_top = -219.5
-offset_right = 325.5
-offset_bottom = 219.5
+offset_left = -254.5
+offset_top = -134.5
+offset_right = 824.5
+offset_bottom = 402.5
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_o2nt0")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="PlotElements" type="Node2D" parent="Plot"]
+
+[node name="AxisX" type="Line2D" parent="Plot/PlotElements"]
+points = PackedVector2Array(-256, 135, 285, 135)
+width = 5.0
+begin_cap_mode = 1
+
+[node name="Xtick" type="Line2D" parent="Plot/PlotElements/AxisX"]
+position = Vector2(0, 135)
+points = PackedVector2Array(0, 0, 0, 15)
+width = 3.0
+begin_cap_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Plot/PlotElements/AxisX/Xtick"]
+position = Vector2(0, 35)
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("3_cy043")
+
+[node name="StartTick" type="Line2D" parent="Plot/PlotElements/AxisX"]
+position = Vector2(-240, 135)
+points = PackedVector2Array(0, 0, 0, 15)
+width = 3.0
+begin_cap_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Plot/PlotElements/AxisX/StartTick"]
+position = Vector2(0, 31)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_qmtt4")
+offset = Vector2(155, 100)
+
+[node name="EndTick" type="Line2D" parent="Plot/PlotElements/AxisX"]
+position = Vector2(275.57, 134.146)
+scale = Vector2(1, 1.09524)
+points = PackedVector2Array(0, 0, 0, 15)
+width = 3.0
+begin_cap_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Plot/PlotElements/AxisX/EndTick"]
+position = Vector2(0, 31)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("4_cy043")
+offset = Vector2(155, 100)
+
+[node name="AxisY" type="Line2D" parent="Plot/PlotElements"]
+points = PackedVector2Array(-256, 135, -256, -135)
+width = 5.0
+begin_cap_mode = 1
+
+[node name="vmin" type="Line2D" parent="Plot/PlotElements/AxisY"]
+position = Vector2(-256, 119)
+points = PackedVector2Array(0, 0, -15, 0)
+width = 3.0
+begin_cap_mode = 1
+
+[node name="vmin_label" type="Label" parent="Plot/PlotElements/AxisY/vmin"]
+offset_left = -56.0
+offset_top = -11.0
+offset_right = -16.0
+offset_bottom = 12.0
+text = "Vmin"
+
+[node name="vmax" type="Line2D" parent="Plot/PlotElements/AxisY"]
+position = Vector2(-256, -119)
+points = PackedVector2Array(0, 0, -15, 0)
+width = 3.0
+begin_cap_mode = 1
+
+[node name="vmax_label" type="Label" parent="Plot/PlotElements/AxisY/vmax"]
+offset_left = -60.0
+offset_top = -11.0
+offset_right = -16.0
+offset_bottom = 12.0
+text = "Vmax"
+
+[node name="PlotLine" type="Node2D" parent="Plot"]
+
+[node name="Line2D" type="Line2D" parent="Plot/PlotLine"]
+position = Vector2(-240, 119)
+points = PackedVector2Array(0, 0, 114.5, -74.5, 246.5, -74.5, 276.5, -126.5, 516.5, -126.5)
+width = 7.5
+default_color = Color(0.45098, 0.803922, 0.294118, 1)
+texture = ExtResource("5_1f5t5")
+texture_mode = 2
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
