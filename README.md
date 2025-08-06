@@ -3,7 +3,7 @@
 
 # Inspiration:
 
-In order to create robust and explainable machine leanring models, labelled data may be useful. McElreath's, in his "Statistical Rethinking" textbook, suggests that one might wish to fit or train models on generated data, prior to letting the models loose on the collected data. Here, we can prevent overfitting on real phenomena while also watching over our models to see how it reacts to different ground truths. 
+In order to create robust and explainable machine leanring models, labelled data may be useful. McElreath, in his "Statistical Rethinking" textbook, suggests that one might wish to fit or train models on generated data, prior to letting the models loose on the collected data. Here, we can prevent overfitting on real phenomena while also watching over our models to see how it reacts to different ground truths. 
 
 https://movementecologyjournal.biomedcentral.com/articles/10.1186/s40462-020-00213-x
 
