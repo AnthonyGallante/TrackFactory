@@ -26,6 +26,8 @@ var v_vector: Array
 var a_vector: Array
 var dt_vector: Array
 
+var travel_time: float = 0.0
+
 const PLOT = preload("res://Objects/Plot.tscn")
 
 func _ready() -> void:
@@ -192,7 +194,7 @@ func _on_bake_points_button_pressed() -> void:
 	dt_vector.resize(n_points)
 	
 	# TODO: CLEAN CLEAN CLEAN
-	
+	travel_time = 0.0
 	for i in range(n_points):
 		var __ = command_list[i]
 		vf_cmd_vector[i] = __['Vf']
@@ -220,7 +222,6 @@ func _on_bake_points_button_pressed() -> void:
 			elif a_cmd_vector[i] == 0.0:
 				v_vector[i] = __['Vf']
 				a_vector[i] = 0.0
-			# Acceleration == 0.0
 			else:
 				v_vector[i] = vf_cmd_vector[i]
 				a_vector[i] = 0.0
@@ -239,13 +240,11 @@ func _on_bake_points_button_pressed() -> void:
 			dt_vector[i] = solve_for_time(dx_vector[i], v_vector[i], a_vector[i])
 		else:
 			dt_vector[i] = dx_vector[i] / v_vector[i]
+			
+		travel_time += dt_vector[i]
 		
-	#print(vi_cmd_vector)
-	#print(a_cmd_vector)
-	print("")
-	#print(vf_cmd_vector)
-	print('')
 	#print(v_vector)
+	prints("Travel Time:", travel_time / 3600, "hours")
 	
 	# Handing information over to our plot
 	var plot = PLOT.instantiate()
@@ -253,6 +252,7 @@ func _on_bake_points_button_pressed() -> void:
 	plot.x_axis = baked_progress
 	plot.y_axis = v_vector
 	add_child(plot)
+
 
 func get_segment_midpoints(pct, _curve):
 	var segment_midpoints := []
