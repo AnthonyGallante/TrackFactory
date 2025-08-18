@@ -8,6 +8,9 @@ var menu_button_recently_pressed
 var is_currently_dragging: bool = false
 var is_dragging_available: bool = false
 var dragging_start_location: Vector2
+var dialogue_open: bool = false
+
+var simulation_output_directory = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS) + '/'
 
 # Cursors:
 const CURSOR_NONE = preload("res://Assets/Art/UI/kenney_cursor-pack/PNG/Outline/Default/cursor_none.png")

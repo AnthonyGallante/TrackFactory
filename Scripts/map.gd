@@ -72,14 +72,14 @@ func haversine(lat1, lon1, lat2, lon2):
 
 func _control_scroll() -> void:
 	# Scrolling into the map
-	if Input.is_action_just_pressed("scroll_up"):
+	if Input.is_action_just_pressed("scroll_up") and not Global.dialogue_open:
 		if camera.zoom >= MAXIMUM_ZOOM:
 			return
 		else:
 			camera.zoom += camera.zoom * scroll_pace
 	
 	# Scrolling out of the map
-	if Input.is_action_just_pressed("scroll_down"):
+	if Input.is_action_just_pressed("scroll_down") and not Global.dialogue_open:
 		if camera.zoom <= MINIMUM_ZOOM * 1.25:
 			camera.zoom = MINIMUM_ZOOM
 		else:

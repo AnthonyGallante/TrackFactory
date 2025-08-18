@@ -108,6 +108,12 @@ title = "Settings"
 auto_translate_mode = 1
 title = "Help"
 
+[node name="FileDialog" type="FileDialog" parent="Toolbar/MenuBar"]
+title = "Open a Directory"
+ok_button_text = "Select Current Folder"
+file_mode = 2
+use_native_dialog = true
+
 [node name="Control" type="CanvasLayer" parent="."]
 
 [node name="AddNodeButton" type="Button" parent="Control"]
@@ -180,6 +186,8 @@ vertical_alignment = 1
 script = ExtResource("5_si36r")
 metadata/_edit_lock_ = true
 
+[connection signal="index_pressed" from="Toolbar/MenuBar/Settings" to="Toolbar/MenuBar" method="_on_settings_index_pressed"]
+[connection signal="dir_selected" from="Toolbar/MenuBar/FileDialog" to="Toolbar/MenuBar" method="_on_file_dialog_dir_selected"]
 [connection signal="pressed" from="Control/AddNodeButton" to="." method="_add_node_button_pressed"]
 [connection signal="pressed" from="Control/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="Control/BakePointsButton" to="PathManager" method="_on_bake_points_button_pressed"]

@@ -90,10 +90,10 @@ func _on_bake_points_button_pressed() -> void:
 	print("\n=== Creating Path ===\n")
 	
 	# Set the bake_interval 
-	curve.bake_interval = 0.05
-	
+	curve.bake_interval = 0.01
 	var b := []       # Array of Baked Points, in original pixels
 	var latlons := [] # Array of Baked Points, converted to latlon
+	
 	for _p in curve.get_baked_points():
 		b.append(_p)
 		latlons.append(map.pixel_to_latlon(_p.x, _p.y))
@@ -195,53 +195,72 @@ func _on_bake_points_button_pressed() -> void:
 	
 	# TODO: CLEAN CLEAN CLEAN
 	travel_time = 0.0
-	for i in range(n_points):
-		var __ = command_list[i]
-		vf_cmd_vector[i] = __['Vf']
-		vi_cmd_vector[i] = __['Vi']
-		
-		if __['Vi'] != __['Vf']:
-			a_cmd_vector[i] = __['A']
-		else:
-			a_cmd_vector[i] = 0.0
-		
-		if i > 0:
-			var _v = sqrt((v_vector[i-1] ** 2) + 2 * a_cmd_vector[i] * dx_vector[i])
+	var file_path = create_new_csv()
+	var file = FileAccess.open(file_path, FileAccess.WRITE)
+	var file_headers = ['Index', 'Time', 'Coordinate', 'DistanceTravelled', 'Velocity']
+	
+	if file:
+		file.store_csv_line(file_headers)
+		for i in range(n_points):
+			var __ = command_list[i]
+			vf_cmd_vector[i] = __['Vf']
+			vi_cmd_vector[i] = __['Vi']
 			
-			# Speeding up!
-			if _v <= __['Vf'] and a_cmd_vector[i] >= 0.0:
-				v_vector[i] = _v
-				a_vector[i] = a_cmd_vector[i]
-				
-			# Slowing down!
-			elif _v >= __['Vf'] and a_cmd_vector[i] <= 0.0:
-				v_vector[i] = _v
-				a_vector[i] = a_cmd_vector[i]
-				
-			# Not Accelerating!
-			elif a_cmd_vector[i] == 0.0:
-				v_vector[i] = __['Vf']
-				a_vector[i] = 0.0
+			if __['Vi'] != __['Vf']:
+				a_cmd_vector[i] = __['A']
 			else:
-				v_vector[i] = vf_cmd_vector[i]
-				a_vector[i] = 0.0
+				a_cmd_vector[i] = 0.0
 			
-		# if i == 0:
-		else:
-			v_vector[i] = vi_cmd_vector[i]
-			a_vector[i] = a_cmd_vector[i]
-		
-		if __['A'] == 0.0:
-			v_vector[i] = __['Vf']
-		
-		dwell_cmd_vector[i] = __['Dwell']
-		
-		if a_vector[i] != 0:
-			dt_vector[i] = solve_for_time(dx_vector[i], v_vector[i], a_vector[i])
-		else:
-			dt_vector[i] = dx_vector[i] / v_vector[i]
+			if i > 0:
+				var _v = sqrt((v_vector[i-1] ** 2) + 2 * a_cmd_vector[i] * dx_vector[i])
+				
+				# Speeding up!
+				if _v <= __['Vf'] and a_cmd_vector[i] >= 0.0:
+					v_vector[i] = _v
+					a_vector[i] = a_cmd_vector[i]
+					
+				# Slowing down!
+				elif _v >= __['Vf'] and a_cmd_vector[i] <= 0.0:
+					v_vector[i] = _v
+					a_vector[i] = a_cmd_vector[i]
+					
+				# Not Accelerating!
+				elif a_cmd_vector[i] == 0.0:
+					v_vector[i] = __['Vf']
+					a_vector[i] = 0.0
+				else:
+					v_vector[i] = vf_cmd_vector[i]
+					a_vector[i] = 0.0
+				
+			# if i == 0:
+			else:
+				v_vector[i] = vi_cmd_vector[i]
+				a_vector[i] = a_cmd_vector[i]
 			
-		travel_time += dt_vector[i]
+			if __['A'] == 0.0:
+				v_vector[i] = __['Vf']
+			
+			dwell_cmd_vector[i] = __['Dwell']
+			
+			if a_vector[i] != 0:
+				dt_vector[i] = solve_for_time(dx_vector[i], v_vector[i], a_vector[i])
+			else:
+				dt_vector[i] = dx_vector[i] / v_vector[i]
+				
+			travel_time += dt_vector[i]
+			
+			file.store_csv_line([
+				str(i),
+				str(travel_time), 
+				str(latlons[i]), 
+				str(dx_vector[i]), 
+				str(v_vector[i])
+			])
+		
+		file.close()
+		print("Data successfully saved to CSV: " + file_path)
+	else:
+		print("Error opening file: " + file_path)
 		
 	#print(v_vector)
 	prints("Travel Time:", travel_time / 3600, "hours")
@@ -296,10 +315,6 @@ func _on_start_movement_button_pressed() -> void:
 	moving = true
 
 
-func calculate_path_vectors():
-	pass
-
-
 func float_range(start: float, end: float, step: float) -> PackedFloat64Array:
 	var result = PackedFloat64Array()
 	var current = start
@@ -321,4 +336,11 @@ func solve_for_time(dx: float, v: float, a: float) -> float:
 
 func get_node_commands(node):
 	return {"Vi": node.vi, "Vf": node.vf, 'A': node.a, "Dwell": node.dwell}
-	
+
+
+#TODO Allow user to change simulation output directory
+func create_new_csv() -> String:
+	var dt = Time.get_datetime_dict_from_system()
+	var file_time = [str(dt.day), str(dt.month), str(dt.year), str(dt.hour), str(dt.minute), str(dt.second)]
+	var file_path = Global.simulation_output_directory + 'Track_Simulation_Output_' + '-'.join(file_time) + '.csv'
+	return file_path

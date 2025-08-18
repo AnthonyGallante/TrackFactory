@@ -47,6 +47,9 @@ folder_colors={
 "res://Scripts/": "pink",
 "res://UI/": "green",
 "res://addons/": "gray",
+"res://data/": "red",
+"res://data/input/": "orange",
+"res://data/output/": "teal",
 "res://loading/": "gray"
 }
 
