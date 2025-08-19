@@ -49,6 +49,7 @@ offset_top = 3.0
 offset_right = -3.0
 offset_bottom = 53.0
 grow_horizontal = 0
+tooltip_text = "Change Node Behavior"
 icon = ExtResource("2_rmn0a")
 expand_icon = true
 

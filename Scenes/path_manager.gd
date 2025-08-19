@@ -170,7 +170,7 @@ func _on_bake_points_button_pressed() -> void:
 	segment_progress.append(1.0)
 	#print(segment_progress)
 	
-	var segment_distances = get_segment_deltas(segment_progress, d_tot)
+	#var segment_distances = get_segment_deltas(segment_progress, d_tot)
 	var segment_midpoint = get_segment_midpoints(segment_progress, curve)
 	print(segment_midpoint)
 	

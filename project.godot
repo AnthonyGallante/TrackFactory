@@ -30,6 +30,7 @@ gdscript/warnings/unused_signal=0
 window/size/borderless=true
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="uid://b22l4jvr1lkxv"
+mouse_cursor/custom_image_hotspot=Vector2(5, 5)
 
 [editor_plugins]
 

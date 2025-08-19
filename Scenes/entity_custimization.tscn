@@ -1,41 +1,648 @@
-[gd_scene load_steps=3 format=3 uid="uid://dh864ygsrvu1f"]
+[gd_scene load_steps=14 format=3 uid="uid://dh864ygsrvu1f"]
 
-[ext_resource type="Script" uid="uid://c5ruj1e0o1f7j" path="res://Scripts/entity_customization_menu_bar.gd" id="1_taupt"]
+[ext_resource type="Texture2D" uid="uid://pwdatbjyhx1v" path="res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Pieces (Green)/pieceGreen_border01.png" id="1_2wwen"]
+[ext_resource type="Texture2D" uid="uid://c4gpn43uw435a" path="res://Assets/Art/UI/kenney_board-game-icons/PNG/Double (128px)/hourglass.png" id="1_ovgwg"]
+[ext_resource type="Texture2D" uid="uid://chqu5cgxsio8b" path="res://Assets/Art/UI/kenney_board-game-icons/PNG/Double (128px)/dice_3D_detailed.png" id="1_taupt"]
+[ext_resource type="Texture2D" uid="uid://dj14h61w8fcoo" path="res://Assets/Art/UI/kenney_board-game-icons/PNG/Default (64px)/cards_collection_outline.png" id="1_vuoor"]
+[ext_resource type="Texture2D" uid="uid://5jqkk7mpht4r" path="res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Pieces (Green)/pieceGreen_border04.png" id="2_88n7a"]
+[ext_resource type="Texture2D" uid="uid://ckbhjuy6h1gmq" path="res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Pieces (Green)/pieceGreen_border13.png" id="3_uvq8x"]
+[ext_resource type="Texture2D" uid="uid://u6ji1xacgw3q" path="res://Assets/Art/UI/kenney_board-game-icons/PNG/Double (128px)/token_add.png" id="4_jjmg0"]
+[ext_resource type="Texture2D" uid="uid://otxai3a767eo" path="res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Pieces (Green)/pieceGreen_border14.png" id="4_vuoor"]
+[ext_resource type="Texture2D" uid="uid://bnwn5jq5ro0xa" path="res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Pieces (Green)/pieceGreen_border16.png" id="5_4w8wa"]
+[ext_resource type="Texture2D" uid="uid://1dh2t3hwon6l" path="res://Assets/Art/UI/kenney_board-game-icons/PNG/Double (128px)/token_remove.png" id="5_rbtn1"]
+[ext_resource type="Texture2D" uid="uid://jk2udgvgpfbe" path="res://Assets/Art/UI/kenney_game-icons/PNG/White/2x/plus.png" id="6_rbtn1"]
+[ext_resource type="Texture2D" uid="uid://ba3f21tdhj05h" path="res://Assets/Art/UI/kenney_board-game-icons/PNG/Default (64px)/arrow_rotate.png" id="6_uvq8x"]
+[ext_resource type="PackedScene" uid="uid://dgr8sgbfjg3ih" path="res://Scenes/toolbar.tscn" id="12_uvq8x"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ux4nc"]
-bg_color = Color(0.137255, 0.168627, 0.176471, 1)
-
-[node name="EntityCustimization" type="Node2D"]
-
-[node name="Toolbar" type="CanvasLayer" parent="."]
-
-[node name="ToolbarPanel" type="Panel" parent="Toolbar"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -576.0
-offset_right = 576.0
-offset_bottom = 31.0
+[node name="EntityCustimization" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 29.0
 grow_horizontal = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ux4nc")
+grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="MenuBar" type="MenuBar" parent="Toolbar"]
-offset_left = 10.0
-offset_right = 580.0
-offset_bottom = 40.0
-flat = true
-script = ExtResource("1_taupt")
+[node name="GraphEdit" type="GraphEdit" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+zoom = 0.75
+zoom_min = 0.5
+zoom_max = 1.75
+minimap_enabled = false
+show_menu = false
+show_zoom_buttons = false
+show_grid_buttons = false
+show_minimap_button = false
+show_arrange_button = false
+metadata/_edit_lock_ = true
 
-[node name="File" type="PopupMenu" parent="Toolbar/MenuBar"]
-auto_translate_mode = 1
-title = "File"
+[node name="EntityCustomizationNode" type="GraphNode" parent="GraphEdit"]
+layout_mode = 0
+offset_left = 467.438
+offset_top = 21.9375
+offset_right = 1182.44
+offset_bottom = 474.938
+scale = Vector2(0.75, 0.75)
+mouse_filter = 1
+position_offset = Vector2(623.25, 29.25)
+draggable = false
+selectable = false
+title = "Entity Customization Menu"
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = false
+slot/2/right_type = 0
+slot/2/right_color = Color(1, 1, 1, 1)
+slot/2/right_icon = null
+slot/2/draw_stylebox = true
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color(1, 1, 1, 1)
+slot/3/left_icon = null
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color(1, 1, 1, 1)
+slot/3/right_icon = null
+slot/3/draw_stylebox = true
+slot/4/left_enabled = false
+slot/4/left_type = 0
+slot/4/left_color = Color(1, 1, 1, 1)
+slot/4/left_icon = null
+slot/4/right_enabled = false
+slot/4/right_type = 0
+slot/4/right_color = Color(1, 1, 1, 1)
+slot/4/right_icon = null
+slot/4/draw_stylebox = true
+slot/5/left_enabled = false
+slot/5/left_type = 0
+slot/5/left_color = Color(1, 1, 1, 1)
+slot/5/left_icon = null
+slot/5/right_enabled = false
+slot/5/right_type = 0
+slot/5/right_color = Color(1, 1, 1, 1)
+slot/5/right_icon = null
+slot/5/draw_stylebox = true
+slot/6/left_enabled = false
+slot/6/left_type = 0
+slot/6/left_color = Color(1, 1, 1, 1)
+slot/6/left_icon = null
+slot/6/right_enabled = false
+slot/6/right_type = 0
+slot/6/right_color = Color(1, 1, 1, 1)
+slot/6/right_icon = null
+slot/6/draw_stylebox = true
+slot/7/left_enabled = false
+slot/7/left_type = 0
+slot/7/left_color = Color(1, 1, 1, 1)
+slot/7/left_icon = null
+slot/7/right_enabled = false
+slot/7/right_type = 0
+slot/7/right_color = Color(1, 1, 1, 1)
+slot/7/right_icon = null
+slot/7/draw_stylebox = true
+slot/8/left_enabled = false
+slot/8/left_type = 0
+slot/8/left_color = Color(1, 1, 1, 1)
+slot/8/left_icon = null
+slot/8/right_enabled = false
+slot/8/right_type = 0
+slot/8/right_color = Color(1, 1, 1, 1)
+slot/8/right_icon = null
+slot/8/draw_stylebox = true
+slot/9/left_enabled = false
+slot/9/left_type = 0
+slot/9/left_color = Color(1, 1, 1, 1)
+slot/9/left_icon = null
+slot/9/right_enabled = false
+slot/9/right_type = 0
+slot/9/right_color = Color(1, 1, 1, 1)
+slot/9/right_icon = null
+slot/9/draw_stylebox = true
 
-[node name="Settings" type="PopupMenu" parent="Toolbar/MenuBar"]
-auto_translate_mode = 1
-title = "Settings"
+[node name="NumberSimulations" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode"]
+layout_mode = 2
 
-[node name="Help" type="PopupMenu" parent="Toolbar/MenuBar"]
-auto_translate_mode = 1
-title = "Help"
+[node name="TextureRect2" type="TextureRect" parent="GraphEdit/EntityCustomizationNode/NumberSimulations"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = ExtResource("1_vuoor")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/NumberSimulations"]
+custom_minimum_size = Vector2(125, 40)
+layout_mode = 2
+text = " Number of Simulations "
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="GraphEdit/EntityCustomizationNode/NumberSimulations"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1.0
+max_value = 10000.0
+value = 500.0
+exp_edit = true
+allow_greater = true
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/NumberSimulations"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+text = "500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Space3" type="HSeparator" parent="GraphEdit/EntityCustomizationNode"]
+layout_mode = 2
+
+[node name="IconAndThroughput" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/IconAndThroughput"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+text = "Icon"
+vertical_alignment = 1
+
+[node name="IconButton" type="OptionButton" parent="GraphEdit/EntityCustomizationNode/IconAndThroughput"]
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+icon_alignment = 1
+expand_icon = true
+selected = 0
+item_count = 5
+popup/item_0/icon = ExtResource("1_2wwen")
+popup/item_0/id = 0
+popup/item_1/icon = ExtResource("2_88n7a")
+popup/item_1/id = 2
+popup/item_2/icon = ExtResource("3_uvq8x")
+popup/item_2/id = 5
+popup/item_3/icon = ExtResource("4_vuoor")
+popup/item_3/id = 3
+popup/item_4/icon = ExtResource("5_4w8wa")
+popup/item_4/id = 4
+
+[node name="VSeparator" type="VSeparator" parent="GraphEdit/EntityCustomizationNode/IconAndThroughput"]
+layout_mode = 2
+
+[node name="Throughput" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/IconAndThroughput"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect2" type="TextureRect" parent="GraphEdit/EntityCustomizationNode/IconAndThroughput/Throughput"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = ExtResource("6_uvq8x")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/IconAndThroughput/Throughput"]
+custom_minimum_size = Vector2(125, 40)
+layout_mode = 2
+text = " Throughput"
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="GraphEdit/EntityCustomizationNode/IconAndThroughput/Throughput"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1.0
+step = 0.5
+value = 92.0
+
+[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/IconAndThroughput/Throughput"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+text = "80%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Space4" type="HSeparator" parent="GraphEdit/EntityCustomizationNode"]
+layout_mode = 2
+
+[node name="PositionLatitude" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/PositionLatitude"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/PositionLatitude/HBoxContainer3"]
+custom_minimum_size = Vector2(205, 40)
+layout_mode = 2
+text = "Latitudinal Accuracy (m)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LatitudeDistribution" type="OptionButton" parent="GraphEdit/EntityCustomizationNode/PositionLatitude/HBoxContainer3"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_icons/icon = ExtResource("1_taupt")
+alignment = 1
+expand_icon = true
+selected = 0
+item_count = 2
+popup/item_0/text = "Normal"
+popup/item_0/id = 0
+popup/item_1/text = "Uniform"
+popup/item_1/id = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/PositionLatitude/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/PositionLatitude/HBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "Par 1"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="GraphEdit/EntityCustomizationNode/PositionLatitude/HBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+value = 50.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/PositionLatitude/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/PositionLatitude/HBoxContainer3/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "Par 2"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="GraphEdit/EntityCustomizationNode/PositionLatitude/HBoxContainer3/VBoxContainer2"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+value = 50.0
+
+[node name="TextureRect2" type="TextureRect" parent="GraphEdit/EntityCustomizationNode/PositionLatitude"]
+layout_mode = 2
+texture = ExtResource("1_ovgwg")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="HSeparator4" type="HSeparator" parent="GraphEdit/EntityCustomizationNode"]
+layout_mode = 2
+
+[node name="PositionLongitude" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/PositionLongitude"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/PositionLongitude/HBoxContainer3"]
+custom_minimum_size = Vector2(205, 40)
+layout_mode = 2
+text = "Longitudinal Accuracy (m)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LongitudeDistribution" type="OptionButton" parent="GraphEdit/EntityCustomizationNode/PositionLongitude/HBoxContainer3"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_icons/icon = ExtResource("1_taupt")
+alignment = 1
+expand_icon = true
+selected = 0
+item_count = 2
+popup/item_0/text = "Normal"
+popup/item_0/id = 0
+popup/item_1/text = "Uniform"
+popup/item_1/id = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/PositionLongitude/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/PositionLongitude/HBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "Par 1"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="GraphEdit/EntityCustomizationNode/PositionLongitude/HBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+value = 50.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/PositionLongitude/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/PositionLongitude/HBoxContainer3/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "Par 2"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="GraphEdit/EntityCustomizationNode/PositionLongitude/HBoxContainer3/VBoxContainer2"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+value = 50.0
+
+[node name="TextureRect2" type="TextureRect" parent="GraphEdit/EntityCustomizationNode/PositionLongitude"]
+layout_mode = 2
+texture = ExtResource("1_ovgwg")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="HSeparator2" type="HSeparator" parent="GraphEdit/EntityCustomizationNode"]
+layout_mode = 2
+
+[node name="Velocity" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Velocity"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Velocity/HBoxContainer3"]
+custom_minimum_size = Vector2(205, 40)
+layout_mode = 2
+text = "Velocity Accuracy (m/s)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VelocityDistribution" type="OptionButton" parent="GraphEdit/EntityCustomizationNode/Velocity/HBoxContainer3"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_icons/icon = ExtResource("1_taupt")
+alignment = 1
+expand_icon = true
+selected = 0
+item_count = 2
+popup/item_0/text = "Normal"
+popup/item_0/id = 0
+popup/item_1/text = "Uniform"
+popup/item_1/id = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Velocity/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Velocity/HBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "Par 1"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="GraphEdit/EntityCustomizationNode/Velocity/HBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+value = 50.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Velocity/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Velocity/HBoxContainer3/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "Par 2"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="GraphEdit/EntityCustomizationNode/Velocity/HBoxContainer3/VBoxContainer2"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+value = 50.0
+
+[node name="HSeparator3" type="HSeparator" parent="GraphEdit/EntityCustomizationNode"]
+layout_mode = 2
+
+[node name="ModeNode" type="GraphNode" parent="GraphEdit"]
+layout_mode = 2
+offset_left = 56.8125
+offset_top = 137.813
+offset_right = 428.813
+offset_bottom = 334.813
+scale = Vector2(0.75, 0.75)
+mouse_filter = 1
+position_offset = Vector2(75.75, 183.75)
+title = "Mode 1"
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = false
+slot/2/right_type = 0
+slot/2/right_color = Color(1, 1, 1, 1)
+slot/2/right_icon = null
+slot/2/draw_stylebox = true
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color(1, 1, 1, 1)
+slot/3/left_icon = null
+slot/3/right_enabled = true
+slot/3/right_type = 0
+slot/3/right_color = Color(1, 1, 1, 1)
+slot/3/right_icon = null
+slot/3/draw_stylebox = true
+slot/4/left_enabled = false
+slot/4/left_type = 0
+slot/4/left_color = Color(1, 1, 1, 1)
+slot/4/left_icon = null
+slot/4/right_enabled = false
+slot/4/right_type = 0
+slot/4/right_color = Color(1, 1, 1, 1)
+slot/4/right_icon = null
+slot/4/draw_stylebox = true
+slot/5/left_enabled = false
+slot/5/left_type = 0
+slot/5/left_color = Color(1, 1, 1, 1)
+slot/5/left_icon = null
+slot/5/right_enabled = false
+slot/5/right_type = 0
+slot/5/right_color = Color(1, 1, 1, 1)
+slot/5/right_icon = null
+slot/5/draw_stylebox = true
+
+[node name="Space5" type="HSeparator" parent="GraphEdit/ModeNode"]
+layout_mode = 2
+
+[node name="MaxMinVelocities" type="HBoxContainer" parent="GraphEdit/ModeNode"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GraphEdit/ModeNode/MaxMinVelocities"]
+layout_mode = 2
+texture = ExtResource("4_jjmg0")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="GraphEdit/ModeNode/MaxMinVelocities"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Minimum Velocity"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VelocityValue" type="LineEdit" parent="GraphEdit/ModeNode/MaxMinVelocities"]
+custom_minimum_size = Vector2(60, 37)
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "10"
+alignment = 1
+max_length = 6
+emoji_menu_enabled = false
+clear_button_enabled = true
+
+[node name="Label2" type="Label" parent="GraphEdit/ModeNode/MaxMinVelocities"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+text = "m/s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Space3" type="HSeparator" parent="GraphEdit/ModeNode"]
+layout_mode = 2
+
+[node name="Hysterisis" type="HBoxContainer" parent="GraphEdit/ModeNode"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GraphEdit/ModeNode/Hysterisis"]
+layout_mode = 2
+texture = ExtResource("5_rbtn1")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="GraphEdit/ModeNode/Hysterisis"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Hysterisis"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HysterisisValue" type="LineEdit" parent="GraphEdit/ModeNode/Hysterisis"]
+custom_minimum_size = Vector2(60, 37)
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "95"
+alignment = 1
+max_length = 3
+emoji_menu_enabled = false
+clear_button_enabled = true
+
+[node name="Label2" type="Label" parent="GraphEdit/ModeNode/Hysterisis"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+text = "%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Space4" type="HSeparator" parent="GraphEdit/ModeNode"]
+layout_mode = 2
+
+[node name="ReportInterval" type="HBoxContainer" parent="GraphEdit/ModeNode"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GraphEdit/ModeNode/ReportInterval"]
+layout_mode = 2
+texture = ExtResource("1_ovgwg")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="GraphEdit/ModeNode/ReportInterval"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Report Interval"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReportIntervalValue" type="LineEdit" parent="GraphEdit/ModeNode/ReportInterval"]
+custom_minimum_size = Vector2(60, 37)
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "60"
+alignment = 1
+max_length = 6
+emoji_menu_enabled = false
+clear_button_enabled = true
+
+[node name="Label3" type="Label" parent="GraphEdit/ModeNode/ReportInterval"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+text = "s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GraphEdit"]
+
+[node name="AddNodeButton" type="Button" parent="GraphEdit/CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_top = 45.0
+offset_right = -20.0
+offset_bottom = 85.0
+grow_horizontal = 0
+tooltip_text = "Add Node"
+icon = ExtResource("6_rbtn1")
+expand_icon = true
+metadata/_edit_lock_ = true
+
+[node name="Toolbar" parent="." instance=ExtResource("12_uvq8x")]

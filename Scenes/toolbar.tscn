@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgr8sgbfjg3ih"]
+
+[ext_resource type="Script" uid="uid://6mfs2cjlonky" path="res://Scripts/menu_bar.gd" id="1_vmn2u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seain"]
+bg_color = Color(0.137255, 0.168627, 0.176471, 1)
+
+[node name="Toolbar" type="CanvasLayer"]
+
+[node name="ToolbarPanel" type="Panel" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 31.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_seain")
+metadata/_edit_lock_ = true
+
+[node name="MenuBar" type="MenuBar" parent="."]
+offset_left = 10.0
+offset_right = 580.0
+offset_bottom = 40.0
+flat = true
+script = ExtResource("1_vmn2u")
+
+[node name="File" type="PopupMenu" parent="MenuBar"]
+auto_translate_mode = 1
+title = "File"
+
+[node name="Settings" type="PopupMenu" parent="MenuBar"]
+auto_translate_mode = 1
+title = "Settings"
+item_count = 1
+item_0/text = "Choose Output Location"
+item_0/id = 0
+
+[node name="Navigation" type="PopupMenu" parent="MenuBar"]
+auto_translate_mode = 1
+title = "Navigation"
+item_count = 3
+item_0/text = "Home"
+item_0/id = 0
+item_1/text = "Application"
+item_1/id = 1
+item_2/text = "Entity Customization"
+item_2/id = 2
+
+[node name="Help" type="PopupMenu" parent="MenuBar"]
+auto_translate_mode = 1
+title = "Help"
+item_count = 1
+item_0/text = "Documentation"
+item_0/id = 0
+
+[node name="FileDialog" type="FileDialog" parent="MenuBar"]
+auto_translate_mode = 1
+title = "Open a Directory"
+ok_button_text = "Select Current Folder"
+file_mode = 2
+use_native_dialog = true
+
+[connection signal="index_pressed" from="MenuBar/Settings" to="MenuBar" method="_on_settings_index_pressed"]
+[connection signal="index_pressed" from="MenuBar/Navigation" to="MenuBar" method="_on_navigation_index_pressed"]
+[connection signal="dir_selected" from="MenuBar/FileDialog" to="MenuBar" method="_on_file_dialog_dir_selected"]

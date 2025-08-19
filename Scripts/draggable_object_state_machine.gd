@@ -17,9 +17,9 @@ var current_type: NodeType
 @export var scaling_time = 0.08
 
 @onready var dwell: float = 60.0   # Offset added by Dwell properties              : s
-@onready var a: float = 2.0        # Acceleration added by Acceleration properties : m/s^2
-@onready var vi: float = 10.0      # Velocity of entity entering the node          : m/s
-@onready var vf: float = 10.0      # The target velocity of the entity             : m/s     
+@onready var a: float = 0.02       # Acceleration added by Acceleration properties : m/s^2
+@onready var vi: float = 5.0       # Velocity of entity entering the node          : m/s
+@onready var vf: float = 5.0       # The target velocity of the entity             : m/s     
 
 # Node references
 @onready var node_menu: Control = $NodeMenu

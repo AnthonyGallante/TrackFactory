@@ -12,6 +12,12 @@ var dialogue_open: bool = false
 
 var simulation_output_directory = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS) + '/'
 
+
+const HOME_PAGE: String = "res://Scenes/landing_page.tscn"
+const APPLICATION_PAGE: String = "res://Scenes/application_page.tscn"
+const CUSTOMIZATION_PAGE: String = "res://Scenes/entity_custimization.tscn"
+
+
 # Cursors:
 const CURSOR_NONE = preload("res://Assets/Art/UI/kenney_cursor-pack/PNG/Outline/Default/cursor_none.png")
 const CURSOR_ALIAS = preload("res://Assets/Art/UI/kenney_cursor-pack/PNG/Outline/Default/cursor_alias.png")

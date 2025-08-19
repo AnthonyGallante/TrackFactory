@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bvp84jer8nir8" path="res://Assets/Textures/path2dtexture.png" id="5_l7mws"]
 [ext_resource type="Script" uid="uid://d1ojpkmkjgeo1" path="res://addons/linepath2d/linepath2d.gd" id="5_o7ptd"]
 [ext_resource type="Script" uid="uid://eh165exkh7nf" path="res://Scripts/mouse_latitude.gd" id="5_si36r"]
-[ext_resource type="Script" uid="uid://6mfs2cjlonky" path="res://Scripts/menu_bar.gd" id="10_nrqfy"]
+[ext_resource type="PackedScene" uid="uid://dgr8sgbfjg3ih" path="res://Scenes/toolbar.tscn" id="10_nrqfy"]
 [ext_resource type="PackedScene" uid="uid://c5gklkq6v2vrr" path="res://Objects/map.tscn" id="12_hq4f6"]
 [ext_resource type="Texture2D" uid="uid://cwhckvsg4u6rg" path="res://Assets/Art/UI/kenney_game-icons/PNG/White/2x/right.png" id="13_si36r"]
 [ext_resource type="PackedScene" uid="uid://xi8ynypr3s3d" path="res://UI/node_settings.tscn" id="14_seain"]
@@ -76,43 +76,7 @@ is_end = true
 sprite = ExtResource("2_rbgls")
 metadata/_edit_lock_ = true
 
-[node name="Toolbar" type="CanvasLayer" parent="."]
-
-[node name="ToolbarPanel" type="Panel" parent="Toolbar"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -576.0
-offset_right = 576.0
-offset_bottom = 31.0
-grow_horizontal = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_seain")
-metadata/_edit_lock_ = true
-
-[node name="MenuBar" type="MenuBar" parent="Toolbar"]
-offset_left = 10.0
-offset_right = 580.0
-offset_bottom = 40.0
-flat = true
-script = ExtResource("10_nrqfy")
-
-[node name="File" type="PopupMenu" parent="Toolbar/MenuBar"]
-title = "File"
-
-[node name="Settings" type="PopupMenu" parent="Toolbar/MenuBar"]
-auto_translate_mode = 1
-title = "Settings"
-
-[node name="Help" type="PopupMenu" parent="Toolbar/MenuBar"]
-auto_translate_mode = 1
-title = "Help"
-
-[node name="FileDialog" type="FileDialog" parent="Toolbar/MenuBar"]
-title = "Open a Directory"
-ok_button_text = "Select Current Folder"
-file_mode = 2
-use_native_dialog = true
+[node name="Toolbar" parent="." instance=ExtResource("10_nrqfy")]
 
 [node name="Control" type="CanvasLayer" parent="."]
 
@@ -122,6 +86,7 @@ offset_left = 1025.0
 offset_top = 45.0
 offset_right = 1075.0
 offset_bottom = 95.0
+tooltip_text = "Add Node"
 icon = ExtResource("2_65sjf")
 expand_icon = true
 
@@ -130,6 +95,7 @@ offset_left = 1089.0
 offset_top = 45.0
 offset_right = 1139.0
 offset_bottom = 95.0
+tooltip_text = "Reset"
 icon = ExtResource("4_xwyji")
 expand_icon = true
 
@@ -138,6 +104,7 @@ offset_left = 880.0
 offset_top = 46.0
 offset_right = 1005.0
 offset_bottom = 77.0
+tooltip_text = "View the entity's changes in velocity as it traverses its path."
 text = "📈 Plot Path"
 
 [node name="StartMovementButton" type="Button" parent="Control"]
@@ -145,6 +112,7 @@ offset_left = 750.0
 offset_top = 46.0
 offset_right = 871.0
 offset_bottom = 77.0
+tooltip_text = "Start simulation "
 text = "Start"
 icon = ExtResource("13_si36r")
 expand_icon = true
@@ -186,8 +154,6 @@ vertical_alignment = 1
 script = ExtResource("5_si36r")
 metadata/_edit_lock_ = true
 
-[connection signal="index_pressed" from="Toolbar/MenuBar/Settings" to="Toolbar/MenuBar" method="_on_settings_index_pressed"]
-[connection signal="dir_selected" from="Toolbar/MenuBar/FileDialog" to="Toolbar/MenuBar" method="_on_file_dialog_dir_selected"]
 [connection signal="pressed" from="Control/AddNodeButton" to="." method="_add_node_button_pressed"]
 [connection signal="pressed" from="Control/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="Control/BakePointsButton" to="PathManager" method="_on_bake_points_button_pressed"]
