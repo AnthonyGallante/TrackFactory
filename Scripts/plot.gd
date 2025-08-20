@@ -28,5 +28,6 @@ func _ready() -> void:
 	plot_line.remove_point(0)
 	plot_line.remove_point(len(plot_line.points) - 1)
 
+
 func _on_close_requested() -> void:
 	queue_free()

@@ -3,10 +3,11 @@ extends MenuBar
 @onready var file: PopupMenu = $File
 @onready var settings: PopupMenu = $Settings
 @onready var help: PopupMenu = $Help
-@onready var file_dialog = $FileDialog # Assuming FileDialog is a child node
+@onready var file_dialog = $FileDialog
 
 func _ready() -> void:
 	pass
+
 
 func _process(_delta: float) -> void:
 	if file_dialog.visible:
