@@ -73,3 +73,8 @@ var velocity_distribution: Distribution = Distribution.NORMAL
 var latitude_params := [0.0, 1.0]
 var longitude_params := [0.0, 1.0]
 var velocity_params := [0.0, 1.0]
+
+# Modes
+var mode1_params := [null, null, null]
+var mode2_params := [null, null, null]
+var mode3_params := [null, null, null]

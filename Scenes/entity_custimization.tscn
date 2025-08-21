@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dh864ygsrvu1f"]
+[gd_scene load_steps=27 format=3 uid="uid://dh864ygsrvu1f"]
 
 [ext_resource type="Texture2D" uid="uid://pwdatbjyhx1v" path="res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Pieces (Green)/pieceGreen_border01.png" id="1_2wwen"]
 [ext_resource type="Script" uid="uid://r1turnm21r81" path="res://Scripts/entity_custimization.gd" id="1_4w8wa"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dj14h61w8fcoo" path="res://Assets/Art/UI/kenney_board-game-icons/PNG/Default (64px)/cards_collection_outline.png" id="1_vuoor"]
 [ext_resource type="Script" uid="uid://bhsosddaea0m4" path="res://Scripts/entity_customization_node.gd" id="2_1sq5f"]
 [ext_resource type="Texture2D" uid="uid://5jqkk7mpht4r" path="res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Pieces (Green)/pieceGreen_border04.png" id="2_88n7a"]
+[ext_resource type="Script" uid="uid://068kv2payl4o" path="res://Scripts/graph_edit.gd" id="2_ipkct"]
 [ext_resource type="Script" uid="uid://rf6wl5kofrdw" path="res://Scripts/number_simulations.gd" id="3_kb805"]
 [ext_resource type="Texture2D" uid="uid://ckbhjuy6h1gmq" path="res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Pieces (Green)/pieceGreen_border13.png" id="3_uvq8x"]
 [ext_resource type="Texture2D" uid="uid://otxai3a767eo" path="res://Assets/Art/Objects/kenney_boardgame-pack/PNG/Pieces (Green)/pieceGreen_border14.png" id="4_vuoor"]
@@ -18,6 +19,20 @@
 [ext_resource type="PackedScene" uid="uid://dgr8sgbfjg3ih" path="res://Scenes/toolbar.tscn" id="12_uvq8x"]
 [ext_resource type="Script" uid="uid://bl1e43f2rojjw" path="res://Scripts/position_longitude.gd" id="14_kb805"]
 [ext_resource type="Script" uid="uid://crh4oxep1tguf" path="res://Scripts/velocity.gd" id="15_q3qft"]
+[ext_resource type="Texture2D" uid="uid://cu475ofbuujj3" path="res://Assets/Art/UI/kenney_ui-pack/PNG/Red/Double/icon_outline_cross.png" id="20_kb805"]
+[ext_resource type="Script" uid="uid://deq0wac3gnntd" path="res://Scripts/mode_check.gd" id="20_q3qft"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q3qft"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_82ekt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_13sey"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_81djw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ipkct"]
+bg_color = Color(0.176471, 0.176471, 0.176471, 1)
 
 [node name="EntityCustimization" type="Control"]
 layout_mode = 3
@@ -30,14 +45,23 @@ grow_vertical = 2
 script = ExtResource("1_4w8wa")
 metadata/_edit_lock_ = true
 
+[node name="ModeCheckLogic" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("20_q3qft")
+
 [node name="GraphEdit" type="GraphEdit" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 15.0
+offset_bottom = 146.0
 grow_horizontal = 2
 grow_vertical = 2
 show_grid = false
+panning_scheme = 1
 zoom = 0.96
 zoom_min = 0.9
 zoom_max = 1.1
@@ -45,17 +69,150 @@ minimap_enabled = false
 show_grid_buttons = false
 show_minimap_button = false
 show_arrange_button = false
+script = ExtResource("2_ipkct")
+scroll_limit_rect = Rect2(1152, 0, 0, 950)
 metadata/_edit_lock_ = true
 
-[node name="EntityCustomizationNode" type="GraphNode" parent="GraphEdit"]
-layout_mode = 0
-offset_left = 244.8
-offset_top = 7.68
-offset_right = 935.8
-offset_bottom = 631.68
+[node name="ModeCheck3" type="GraphFrame" parent="GraphEdit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 328.5
+offset_top = 236.7
+offset_right = 393.5
+offset_bottom = 338.7
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.96, 0.96)
 mouse_filter = 1
-position_offset = Vector2(255, 8)
+theme_override_styles/panel = SubResource("StyleBoxFlat_q3qft")
+theme_override_styles/panel_selected = SubResource("StyleBoxEmpty_82ekt")
+theme_override_styles/titlebar = SubResource("StyleBoxEmpty_13sey")
+theme_override_styles/titlebar_selected = SubResource("StyleBoxEmpty_81djw")
+position_offset = Vector2(950, 645)
+draggable = false
+selectable = false
+
+[node name="Panel" type="Panel" parent="GraphEdit/ModeCheck3"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GraphEdit/ModeCheck3/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_kb805")
+
+[node name="ModeCheck2" type="GraphFrame" parent="GraphEdit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 328.5
+offset_top = 134.94
+offset_right = 393.5
+offset_bottom = 236.94
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.96, 0.96)
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_q3qft")
+theme_override_styles/panel_selected = SubResource("StyleBoxEmpty_82ekt")
+theme_override_styles/titlebar = SubResource("StyleBoxEmpty_13sey")
+theme_override_styles/titlebar_selected = SubResource("StyleBoxEmpty_81djw")
+position_offset = Vector2(950, 539)
+draggable = false
+selectable = false
+
+[node name="Panel" type="Panel" parent="GraphEdit/ModeCheck2"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GraphEdit/ModeCheck2/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_kb805")
+
+[node name="ModeCheck" type="GraphFrame" parent="GraphEdit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 328.5
+offset_top = 33.18
+offset_right = 393.5
+offset_bottom = 135.18
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.96, 0.96)
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_q3qft")
+theme_override_styles/titlebar = SubResource("StyleBoxEmpty_13sey")
+position_offset = Vector2(950, 433)
+draggable = false
+selectable = false
+
+[node name="Panel" type="Panel" parent="GraphEdit/ModeCheck"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GraphEdit/ModeCheck/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_kb805")
+
+[node name="EntityCustomizationNode" type="GraphNode" parent="GraphEdit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -343.5
+offset_top = -377.7
+offset_right = 347.5
+offset_bottom = 396.3
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.96, 0.96)
+mouse_filter = 1
+position_offset = Vector2(250, 5)
 draggable = false
 selectable = false
 title = "Entity Customization Menu"
@@ -140,6 +297,15 @@ slot/8/right_type = 0
 slot/8/right_color = Color(1, 1, 1, 1)
 slot/8/right_icon = null
 slot/8/draw_stylebox = true
+slot/9/left_enabled = false
+slot/9/left_type = 0
+slot/9/left_color = Color(1, 1, 1, 1)
+slot/9/left_icon = null
+slot/9/right_enabled = false
+slot/9/right_type = 0
+slot/9/right_color = Color(1, 1, 1, 1)
+slot/9/right_icon = null
+slot/9/draw_stylebox = true
 script = ExtResource("2_1sq5f")
 
 [node name="NumberSimulations" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode"]
@@ -492,49 +658,19 @@ clear_button_enabled = true
 [node name="HSeparator3" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Velocity"]
 layout_mode = 2
 
-[node name="NumberOperationalModes" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode"]
-layout_mode = 2
-
-[node name="OperationalModes" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/NumberOperationalModes"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/NumberOperationalModes/OperationalModes"]
-layout_mode = 2
-text = "Select Number of Operational Modes"
-
-[node name="Button" type="Button" parent="GraphEdit/EntityCustomizationNode/NumberOperationalModes/OperationalModes"]
-custom_minimum_size = Vector2(80, 45)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "1"
-
-[node name="Button2" type="Button" parent="GraphEdit/EntityCustomizationNode/NumberOperationalModes/OperationalModes"]
-custom_minimum_size = Vector2(80, 45)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "2"
-
-[node name="Button3" type="Button" parent="GraphEdit/EntityCustomizationNode/NumberOperationalModes/OperationalModes"]
-custom_minimum_size = Vector2(80, 45)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "3"
-
-[node name="Mode1Sep" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/NumberOperationalModes"]
-layout_mode = 2
-
 [node name="Mode1" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode"]
 layout_mode = 2
 
-[node name="Mode1Hbox" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1"]
+[node name="ModeHbox" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Mode1Label" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox"]
+[node name="ModeLabel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ipkct")
 
-[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/Mode1Label"]
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/ModeLabel"]
 custom_minimum_size = Vector2(100, 95)
 layout_mode = 1
 anchors_preset = 15
@@ -546,12 +682,12 @@ text = "Mode 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VelocityPanel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox"]
+[node name="VelocityPanel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox"]
 custom_minimum_size = Vector2(180, 95)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ModeMinVelocity" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/VelocityPanel"]
+[node name="ModeMinVelocity" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/VelocityPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -560,10 +696,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 
-[node name="MinVelocities" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/VelocityPanel/ModeMinVelocity"]
+[node name="MinVelocities" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/VelocityPanel/ModeMinVelocity"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/VelocityPanel/ModeMinVelocity/MinVelocities"]
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/VelocityPanel/ModeMinVelocity/MinVelocities"]
 custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -573,26 +709,25 @@ text = "Minimum Velocity"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/VelocityPanel/ModeMinVelocity"]
+[node name="HSeparator" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/VelocityPanel/ModeMinVelocity"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/VelocityPanel/ModeMinVelocity"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/VelocityPanel/ModeMinVelocity"]
 layout_mode = 2
 
-[node name="VelocityValue" type="LineEdit" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/VelocityPanel/ModeMinVelocity/HBoxContainer"]
+[node name="VelocityValue" type="LineEdit" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/VelocityPanel/ModeMinVelocity/HBoxContainer"]
 custom_minimum_size = Vector2(60, 37)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-placeholder_text = "10"
 alignment = 1
 max_length = 6
 emoji_menu_enabled = false
 clear_button_enabled = true
 
-[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/VelocityPanel/ModeMinVelocity/HBoxContainer"]
+[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/VelocityPanel/ModeMinVelocity/HBoxContainer"]
 custom_minimum_size = Vector2(50, 40)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -600,12 +735,12 @@ text = "m/s"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HysterisisPanel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox"]
+[node name="HysterisisPanel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox"]
 custom_minimum_size = Vector2(180, 95)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Hysterisis" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/HysterisisPanel"]
+[node name="Hysterisis" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/HysterisisPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -614,39 +749,38 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 
-[node name="MinVelocities" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/HysterisisPanel/Hysterisis"]
+[node name="MinVelocities" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/HysterisisPanel/Hysterisis"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/HysterisisPanel/Hysterisis/MinVelocities"]
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/HysterisisPanel/Hysterisis/MinVelocities"]
 custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Velocity required to enter this mode."
+tooltip_text = "Velocity required to exit this mode."
 mouse_filter = 1
 text = "Hysterisis"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/HysterisisPanel/Hysterisis"]
+[node name="HSeparator" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/HysterisisPanel/Hysterisis"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/HysterisisPanel/Hysterisis"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/HysterisisPanel/Hysterisis"]
 layout_mode = 2
 
-[node name="HysterisisValue" type="LineEdit" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/HysterisisPanel/Hysterisis/HBoxContainer"]
+[node name="HysterisisValue" type="LineEdit" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/HysterisisPanel/Hysterisis/HBoxContainer"]
 custom_minimum_size = Vector2(60, 37)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-placeholder_text = "95"
 alignment = 1
 max_length = 3
 emoji_menu_enabled = false
 clear_button_enabled = true
 
-[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/HysterisisPanel/Hysterisis/HBoxContainer"]
+[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/HysterisisPanel/Hysterisis/HBoxContainer"]
 custom_minimum_size = Vector2(50, 40)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -654,12 +788,12 @@ text = "%"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ReportIntervalPanel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox"]
+[node name="ReportIntervalPanel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox"]
 custom_minimum_size = Vector2(180, 95)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ReportInterval" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/ReportIntervalPanel"]
+[node name="ReportInterval" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/ReportIntervalPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -668,39 +802,38 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 
-[node name="MinVelocities" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/ReportIntervalPanel/ReportInterval"]
+[node name="MinVelocities" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/ReportIntervalPanel/ReportInterval"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/ReportIntervalPanel/ReportInterval/MinVelocities"]
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/ReportIntervalPanel/ReportInterval/MinVelocities"]
 custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Velocity required to enter this mode."
+tooltip_text = "Time between reports (in seconds)."
 mouse_filter = 1
 text = "Report Interval"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/ReportIntervalPanel/ReportInterval"]
+[node name="HSeparator" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/ReportIntervalPanel/ReportInterval"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/ReportIntervalPanel/ReportInterval"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/ReportIntervalPanel/ReportInterval"]
 layout_mode = 2
 
-[node name="HysterisisValue" type="LineEdit" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/ReportIntervalPanel/ReportInterval/HBoxContainer"]
+[node name="ReportIntervalValue" type="LineEdit" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/ReportIntervalPanel/ReportInterval/HBoxContainer"]
 custom_minimum_size = Vector2(60, 37)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-placeholder_text = "60"
 alignment = 1
 max_length = 3
 emoji_menu_enabled = false
 clear_button_enabled = true
 
-[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/Mode1Hbox/ReportIntervalPanel/ReportInterval/HBoxContainer"]
+[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/ReportIntervalPanel/ReportInterval/HBoxContainer"]
 custom_minimum_size = Vector2(50, 40)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -709,6 +842,415 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Mode1Sep" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode1"]
+layout_mode = 2
+
+[node name="Mode2" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode"]
+layout_mode = 2
+
+[node name="ModeHbox" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode2"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="ModeLabel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ipkct")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/ModeLabel"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -52.0
+offset_right = 50.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/ModeLabel/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+text = "Mode 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ModeEnable" type="CheckButton" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/ModeLabel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="VelocityPanel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox"]
+custom_minimum_size = Vector2(180, 95)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ModeMinVelocity" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/VelocityPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="MinVelocities" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/VelocityPanel/ModeMinVelocity"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/VelocityPanel/ModeMinVelocity/MinVelocities"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Velocity required to enter this mode."
+mouse_filter = 1
+text = "Minimum Velocity"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/VelocityPanel/ModeMinVelocity"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/VelocityPanel/ModeMinVelocity"]
+layout_mode = 2
+
+[node name="VelocityValue" type="LineEdit" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/VelocityPanel/ModeMinVelocity/HBoxContainer"]
+custom_minimum_size = Vector2(60, 37)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+max_length = 6
+editable = false
+emoji_menu_enabled = false
+clear_button_enabled = true
+
+[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/VelocityPanel/ModeMinVelocity/HBoxContainer"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "m/s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HysterisisPanel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox"]
+custom_minimum_size = Vector2(180, 95)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hysterisis" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/HysterisisPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="MinVelocities" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/HysterisisPanel/Hysterisis"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/HysterisisPanel/Hysterisis/MinVelocities"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Velocity required to exit this mode."
+mouse_filter = 1
+text = "Hysterisis"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/HysterisisPanel/Hysterisis"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/HysterisisPanel/Hysterisis"]
+layout_mode = 2
+
+[node name="HysterisisValue" type="LineEdit" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/HysterisisPanel/Hysterisis/HBoxContainer"]
+custom_minimum_size = Vector2(60, 37)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+max_length = 3
+editable = false
+emoji_menu_enabled = false
+clear_button_enabled = true
+
+[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/HysterisisPanel/Hysterisis/HBoxContainer"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReportIntervalPanel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox"]
+custom_minimum_size = Vector2(180, 95)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ReportInterval" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/ReportIntervalPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="MinVelocities" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/ReportIntervalPanel/ReportInterval"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/ReportIntervalPanel/ReportInterval/MinVelocities"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Time between reports (in seconds)."
+mouse_filter = 1
+text = "Report Interval"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/ReportIntervalPanel/ReportInterval"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/ReportIntervalPanel/ReportInterval"]
+layout_mode = 2
+
+[node name="ReportIntervalValue" type="LineEdit" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/ReportIntervalPanel/ReportInterval/HBoxContainer"]
+custom_minimum_size = Vector2(60, 37)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+max_length = 3
+editable = false
+emoji_menu_enabled = false
+clear_button_enabled = true
+
+[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/ReportIntervalPanel/ReportInterval/HBoxContainer"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mode1Sep" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode2"]
+layout_mode = 2
+
+[node name="Mode3" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode"]
+layout_mode = 2
+
+[node name="ModeHbox" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode3"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="ModeLabel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ipkct")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/ModeLabel"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -52.0
+offset_right = 50.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/ModeLabel/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+text = "Mode 3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ModeEnable" type="CheckButton" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/ModeLabel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+disabled = true
+
+[node name="VelocityPanel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox"]
+custom_minimum_size = Vector2(180, 95)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ModeMinVelocity" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/VelocityPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="MinVelocities" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/VelocityPanel/ModeMinVelocity"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/VelocityPanel/ModeMinVelocity/MinVelocities"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Velocity required to enter this mode."
+mouse_filter = 1
+text = "Minimum Velocity"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/VelocityPanel/ModeMinVelocity"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/VelocityPanel/ModeMinVelocity"]
+layout_mode = 2
+
+[node name="VelocityValue" type="LineEdit" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/VelocityPanel/ModeMinVelocity/HBoxContainer"]
+custom_minimum_size = Vector2(60, 37)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+max_length = 6
+editable = false
+emoji_menu_enabled = false
+clear_button_enabled = true
+
+[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/VelocityPanel/ModeMinVelocity/HBoxContainer"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "m/s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HysterisisPanel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox"]
+custom_minimum_size = Vector2(180, 95)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hysterisis" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/HysterisisPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="MinVelocities" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/HysterisisPanel/Hysterisis"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/HysterisisPanel/Hysterisis/MinVelocities"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Velocity required to exit this mode."
+mouse_filter = 1
+text = "Hysterisis"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/HysterisisPanel/Hysterisis"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/HysterisisPanel/Hysterisis"]
+layout_mode = 2
+
+[node name="HysterisisValue" type="LineEdit" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/HysterisisPanel/Hysterisis/HBoxContainer"]
+custom_minimum_size = Vector2(60, 37)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+max_length = 3
+editable = false
+emoji_menu_enabled = false
+clear_button_enabled = true
+
+[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/HysterisisPanel/Hysterisis/HBoxContainer"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReportIntervalPanel" type="Panel" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox"]
+custom_minimum_size = Vector2(180, 95)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ReportInterval" type="VBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/ReportIntervalPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="MinVelocities" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/ReportIntervalPanel/ReportInterval"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/ReportIntervalPanel/ReportInterval/MinVelocities"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Time between reports (in seconds)."
+mouse_filter = 1
+text = "Report Interval"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/ReportIntervalPanel/ReportInterval"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/ReportIntervalPanel/ReportInterval"]
+layout_mode = 2
+
+[node name="ReportIntervalValue" type="LineEdit" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/ReportIntervalPanel/ReportInterval/HBoxContainer"]
+custom_minimum_size = Vector2(60, 37)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+max_length = 3
+editable = false
+emoji_menu_enabled = false
+clear_button_enabled = true
+
+[node name="Label2" type="Label" parent="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/ReportIntervalPanel/ReportInterval/HBoxContainer"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mode1Sep" type="HSeparator" parent="GraphEdit/EntityCustomizationNode/Mode3"]
 layout_mode = 2
 
 [node name="Toolbar" parent="." instance=ExtResource("12_uvq8x")]
@@ -727,3 +1269,23 @@ layout_mode = 2
 [connection signal="item_selected" from="GraphEdit/EntityCustomizationNode/Velocity/HBoxContainer3/VelocityDistribution" to="GraphEdit/EntityCustomizationNode/Velocity" method="_on_velocity_distribution_item_selected"]
 [connection signal="text_submitted" from="GraphEdit/EntityCustomizationNode/Velocity/HBoxContainer3/VBoxContainer/VelocityPar1" to="GraphEdit/EntityCustomizationNode/Velocity" method="_on_velocity_par_1_text_submitted"]
 [connection signal="text_submitted" from="GraphEdit/EntityCustomizationNode/Velocity/HBoxContainer3/VBoxContainer2/VelocityPar2" to="GraphEdit/EntityCustomizationNode/Velocity" method="_on_velocity_par_2_text_submitted"]
+[connection signal="text_changed" from="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/VelocityPanel/ModeMinVelocity/HBoxContainer/VelocityValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode1_velocity_value_submitted"]
+[connection signal="text_submitted" from="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/VelocityPanel/ModeMinVelocity/HBoxContainer/VelocityValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode1_velocity_value_submitted"]
+[connection signal="text_changed" from="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/HysterisisPanel/Hysterisis/HBoxContainer/HysterisisValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode1_hysterisis_value_submitted"]
+[connection signal="text_submitted" from="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/HysterisisPanel/Hysterisis/HBoxContainer/HysterisisValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode1_hysterisis_value_submitted"]
+[connection signal="text_changed" from="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/ReportIntervalPanel/ReportInterval/HBoxContainer/ReportIntervalValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode1_report_interval_value_submitted"]
+[connection signal="text_submitted" from="GraphEdit/EntityCustomizationNode/Mode1/ModeHbox/ReportIntervalPanel/ReportInterval/HBoxContainer/ReportIntervalValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode1_report_interval_value_submitted"]
+[connection signal="toggled" from="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/ModeLabel/VBoxContainer/ModeEnable" to="." method="_on_mode2_enable_toggled"]
+[connection signal="text_changed" from="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/VelocityPanel/ModeMinVelocity/HBoxContainer/VelocityValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode2_velocity_value_submitted"]
+[connection signal="text_submitted" from="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/VelocityPanel/ModeMinVelocity/HBoxContainer/VelocityValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode2_velocity_value_submitted"]
+[connection signal="text_changed" from="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/HysterisisPanel/Hysterisis/HBoxContainer/HysterisisValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode2_hysterisis_value_submitted"]
+[connection signal="text_submitted" from="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/HysterisisPanel/Hysterisis/HBoxContainer/HysterisisValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode2_hysterisis_value_submitted"]
+[connection signal="text_changed" from="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/ReportIntervalPanel/ReportInterval/HBoxContainer/ReportIntervalValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode2_report_interval_value_submitted"]
+[connection signal="text_submitted" from="GraphEdit/EntityCustomizationNode/Mode2/ModeHbox/ReportIntervalPanel/ReportInterval/HBoxContainer/ReportIntervalValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode2_report_interval_value_submitted"]
+[connection signal="toggled" from="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/ModeLabel/VBoxContainer/ModeEnable" to="." method="_on_mode3_enable_toggled"]
+[connection signal="text_changed" from="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/VelocityPanel/ModeMinVelocity/HBoxContainer/VelocityValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode3_velocity_value_submitted"]
+[connection signal="text_submitted" from="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/VelocityPanel/ModeMinVelocity/HBoxContainer/VelocityValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode3_velocity_value_submitted"]
+[connection signal="text_changed" from="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/HysterisisPanel/Hysterisis/HBoxContainer/HysterisisValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode3_hysterisis_value_submitted"]
+[connection signal="text_submitted" from="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/HysterisisPanel/Hysterisis/HBoxContainer/HysterisisValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode3_hysterisis_value_submitted"]
+[connection signal="text_changed" from="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/ReportIntervalPanel/ReportInterval/HBoxContainer/ReportIntervalValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode3_report_interval_value_submitted"]
+[connection signal="text_submitted" from="GraphEdit/EntityCustomizationNode/Mode3/ModeHbox/ReportIntervalPanel/ReportInterval/HBoxContainer/ReportIntervalValue" to="GraphEdit/EntityCustomizationNode" method="_on_mode3_report_interval_value_submitted"]
